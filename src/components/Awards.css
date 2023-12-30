@@ -1,0 +1,36 @@
+/* Awards.css */
+.marquee {
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-content {
+  white-space: nowrap;
+  display: flex;
+  overflow: hidden;
+  animation: marquee 7s linear infinite ;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.marquee-imageIso {
+  width: 200px; /* Adjust the width as needed */
+  height: 180px;
+  margin-right: 20px; /* Adjust the margin as needed */
+}
+
+.marquee-imageNasscom {
+  width: 100%; /* Set width to 100% for responsiveness */
+  max-width: 150px; /* Set a maximum width if needed */
+  height: auto; /* Allow the height to adjust proportionally */
+  margin-right: 10px; /* Adjust the margin as needed */
+  margin-top: 70px;
+  margin-bottom: 30px;
+}

@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/static/css/main.40716cdd.css",
+    "main.js": "/static/js/main.a6c8db67.js",
+    "static/media/tech22.jpg": "/static/media/tech22.816f964643f978a902a6.jpg",
+    "static/media/lab2.jpg": "/static/media/lab2.e47647ccc1c24451f99f.jpg",
+    "static/media/three.jpg": "/static/media/three.63ce66361785b752f0dc.jpg",
+    "static/media/missionPic2.jpg": "/static/media/missionPic2.de9309cc0036eeac1d22.jpg",
+    "static/media/tech44.jpg": "/static/media/tech44.96dd3e32e40e74724b2e.jpg",
+    "static/media/one.jpg": "/static/media/one.8dd0a868f8a8fdce307a.jpg",
+    "static/media/tech33.jpg": "/static/media/tech33.ebd2695a44cfad67aee5.jpg",
+    "static/media/missionPic.jpg": "/static/media/missionPic.182b3210a8e2c8750f2a.jpg",
+    "static/media/two.jpg": "/static/media/two.a0bcc78b31378e023c88.jpg",
+    "static/media/image5.png": "/static/media/image5.0f847f7cc1c508d5ec2e.png",
+    "static/media/image6.png": "/static/media/image6.a4cbaecf8d39552c7763.png",
+    "static/media/image2.png": "/static/media/image2.ddb39ae5d92c52fed440.png",
+    "static/media/image3.png": "/static/media/image3.5897b5fa9de0820cbc61.png",
+    "static/media/image4.png": "/static/media/image4.321ca148594888cd22a6.png",
+    "static/media/tech55.png": "/static/media/tech55.e402242de94b86e2952b.png",
+    "static/media/image1.png": "/static/media/image1.d88d23d53178297bdfc3.png",
+    "static/media/lab11.png": "/static/media/lab11.e4ed846c8f7e4c5f56a4.png",
+    "static/media/lab51.png": "/static/media/lab51.2556d29601789223c85b.png",
+    "static/media/pd.jpg": "/static/media/pd.13e397f413173c89d037.jpg",
+    "static/media/vs.jpg": "/static/media/vs.fdd634537153b535d05e.jpg",
+    "static/media/tech11.webp": "/static/media/tech11.a60802583caa8634a4e3.webp",
+    "static/media/tech66.png": "/static/media/tech66.2fe77ecda078615745a7.png",
+    "static/media/iso.png": "/static/media/iso.13b0ae5013371ca1d084.png",
+    "static/media/Logo.png": "/static/media/Logo.c9920d154c922ea9e355.png",
+    "static/media/nasscom.png": "/static/media/nasscom.87c5af8e8b0f11237400.png",
+    "static/media/lab3.avif": "/static/media/lab3.888f728e857d17e5b534.avif",
+    "index.html": "/index.html",
+    "main.40716cdd.css.map": "/static/css/main.40716cdd.css.map",
+    "main.a6c8db67.js.map": "/static/js/main.a6c8db67.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.40716cdd.css",
+    "static/js/main.a6c8db67.js"
+  ]
+}
