@@ -84,7 +84,11 @@ const Navbar = () => {
             rel="noopener noreferrer"
             className="ml-4 bg-[hsl(357,77%,51%)] text-white px-5 py-2 rounded-full font-bold hover:bg-red-600 transition duration-300 shadow-lg animate-pulse"
           >
+<<<<<<< Updated upstream
             🚀 XraiDigital
+=======
+            🚀 Explore POCT
+>>>>>>> Stashed changes
           </a>
           {/* Tooltip */}
           <span className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-white text-blue-600 text-base font-semibold px-4 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
@@ -93,12 +97,23 @@ const Navbar = () => {
 
         </li>
         <li className="p-4 font-bold hover:text-[hsl(357,100%,59%)] cursor-pointer">
+<<<<<<< Updated upstream
             <Link
             to="/onboarding"
             className="px-4 py-2 bg-blue-600 text-white rounded"
           >
             Registration
           </Link>
+=======
+          <a
+            href="https://payment.u4rad.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            
+          >
+            Login
+          </a>
+>>>>>>> Stashed changes
           {/* Tooltip */}
           <span className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-white text-blue-600 text-base font-semibold px-4 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
             Point of Care Testing
