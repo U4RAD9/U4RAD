@@ -1,0 +1,244 @@
+/* ===============================
+PAGE WRAPPER
+================================ */
+
+.dashboard-wrapper{
+padding:30px;
+background:#f4f5f7;
+min-height:100vh;
+font-family:Segoe UI, sans-serif;
+}
+
+.dashboard-heading{
+text-align:center;
+margin-bottom:15px;
+font-weight:600;
+color:#333;
+}
+
+
+/* ===============================
+NAVBAR
+================================ */
+
+.navbar-container{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#ffffff;
+padding:12px 20px;
+border-bottom:1px solid #e5e5e5;
+}
+
+.navbar-right{
+display:flex;
+gap:12px;
+align-items:center;
+}
+
+
+/* ===============================
+BUTTON STYLE
+================================ */
+
+.dashboard-btn{
+
+background:#ef4444;
+color:white;
+border:none;
+padding:8px 16px;
+border-radius:6px;
+cursor:pointer;
+font-weight:600;
+font-size:14px;
+
+transition:all .2s ease;
+
+}
+
+.dashboard-btn:hover{
+
+background:#dc2626;
+transform:translateY(-1px);
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+
+}
+
+
+/* ===============================
+STATS BAR
+================================ */
+
+.stats-bar{
+
+background:white;
+
+display:flex;
+
+justify-content:space-between;
+
+padding:16px;
+
+border-radius:10px;
+
+margin:20px 0;
+
+font-size:16px;
+
+box-shadow:0 1px 3px rgba(0,0,0,0.08);
+
+}
+
+
+/* ===============================
+CONTROLS
+================================ */
+
+.dashboard-controls{
+
+display:flex;
+
+gap:15px;
+
+align-items:center;
+
+margin-bottom:20px;
+
+}
+
+.search-box{
+
+padding:9px;
+
+border-radius:8px;
+
+border:1px solid #ddd;
+
+background:white;
+
+transition:.2s;
+
+}
+
+.search-box:focus{
+
+outline:none;
+
+border-color:#ef4444;
+
+box-shadow:0 0 0 2px rgba(239,68,68,0.1);
+
+}
+
+
+/* ===============================
+TABLE WRAPPER
+================================ */
+
+.table-wrapper{
+
+background:white;
+
+border-radius:10px;
+
+max-height:65vh;
+
+overflow:auto;
+
+box-shadow:0 2px 6px rgba(0,0,0,0.05);
+
+}
+
+
+/* ===============================
+TABLE STYLE
+================================ */
+
+.dashboard-table{
+
+width:100%;
+
+border-collapse:collapse;
+
+font-size:14px;
+
+}
+
+
+/* ===============================
+TABLE HEADER
+================================ */
+
+.dashboard-table th{
+
+background:#f3f4f6;
+
+color:#333;
+
+padding:12px;
+
+position:sticky;
+
+top:0;
+
+z-index:2;
+
+font-weight:600;
+
+border-bottom:1px solid #e5e5e5;
+
+}
+
+
+/* ===============================
+TABLE CELLS
+================================ */
+
+.dashboard-table td{
+
+padding:12px;
+
+border-bottom:1px solid #eee;
+
+text-align:center;
+
+background:white;
+
+}
+
+
+/* ===============================
+ROW HOVER
+================================ */
+
+.dashboard-table tbody tr:hover{
+
+background:#fafafa;
+
+}
+
+
+/* ===============================
+STICKY FIRST COLUMN
+================================ */
+
+.dashboard-table th:first-child,
+.dashboard-table td:first-child{
+
+position:sticky;
+
+left:0;
+
+background:white;
+
+z-index:1;
+
+}
+
+.dashboard-table th:first-child{
+
+background:#f3f4f6;
+
+z-index:3;
+
+}

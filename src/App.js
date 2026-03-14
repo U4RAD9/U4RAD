@@ -1,3 +1,47 @@
+// import React from 'react';
+// import Footer from './components/Footer';
+// import Hero from './components/Hero';
+// import Navbar from './components/Navbar';
+// import Newsletter from './components/Newsletter';
+// import Home from './components/Home';
+// import About from './components/About';
+// import Contact from './components/Contact';
+// import { Routes } from 'react-router-dom';
+// import { Route } from 'react-router-dom';
+// import { BrowserRouter } from 'react-router-dom';
+// import Services from './components/Services';
+// import Technology from './components/Technology';
+// import WhyUs from './components/WhyUs';
+// import Vision from './components/Vision';
+// import Awards from './components/Awards';
+// import Certificate from './components/Certificate';
+
+// function App() {
+//   return (
+//     <div>     
+//       <BrowserRouter>
+//         <Navbar />
+//         <Routes>
+//           <Route path="" element={[<Hero />, <Home/>,<Newsletter />,<WhyUs />]} ></Route>
+//           <Route path="/About" element={[<About />, <WhyUs />,<Newsletter />]} ></Route>
+//           <Route path="/Contact" element={[<Contact />]} ></Route>
+//           <Route path="/Services" element={[<Services/>,<Newsletter />]}></Route>
+//           <Route path="/Technology" element={[<Technology/>,<Newsletter />]}></Route>
+//           <Route path="/Vision" element={[<Vision />,<Newsletter />]}></Route>
+//           <Route path="/Awards" element={[<Awards />,<Newsletter />]}></Route>
+         
+//         </Routes>
+//         <Certificate />
+//         <Footer />
+        
+//       </BrowserRouter>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+
 import React from 'react';
 import Footer from './components/Footer';
 import Hero from './components/Hero';
@@ -6,9 +50,6 @@ import Newsletter from './components/Newsletter';
 import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
-import { Routes } from 'react-router-dom';
-import { Route } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
 import Services from './components/Services';
 import Technology from './components/Technology';
 import WhyUs from './components/WhyUs';
@@ -16,26 +57,74 @@ import Vision from './components/Vision';
 import Awards from './components/Awards';
 import Certificate from './components/Certificate';
 
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+
+import { FormProvider } from "./components/context/FormContext";
+
+// import DoctorOnboardingForm from "./pages/doctoronboarding/form.jsx";
+import DoctorOnboardingForm from "./components/pages/doctoronboarding/form.jsx";
+import CallbackForm from "./components/pages/doctoronboarding/callback.jsx";
+import Onboarding from "./components/pages/doctoronboarding/Onboarding.jsx";
+// import CoordinatorDashboard from "./components/pages/doctoronboarding/CoordinatorDashboard.jsx";
+// import SuperCoordinatorDashboard from "./components/pages/doctoronboarding/SuperCoordinatorDashboard.jsx";
+import Login from "./components/pages/doctoronboarding/Login.jsx";
+
+function Layout() {
+
+  const location = useLocation();
+
+  const hideLayout =
+    location.pathname === "/coordinator-dashboard" ||
+    location.pathname === "/super-coordinator-dashboard" ||
+    location.pathname === "/login";
+
+  return (
+    <>
+      {!hideLayout && <Navbar />}
+
+      <Routes>
+
+        <Route path="/" element={<><Hero /><Home /><Newsletter /><WhyUs /></>} />
+
+        <Route path="/about" element={<><About /><WhyUs /><Newsletter /></>} />
+
+        <Route path="/contact" element={<Contact />} />
+
+        <Route path="/services" element={<><Services /><Newsletter /></>} />
+
+        <Route path="/technology" element={<><Technology /><Newsletter /></>} />
+
+        <Route path="/vision" element={<><Vision /><Newsletter /></>} />
+
+        <Route path="/awards" element={<><Awards /><Newsletter /></>} />
+
+        <Route path="/onboarding" element={<Onboarding />} />
+
+        <Route path="/onboarding/radiologist" element={<DoctorOnboardingForm />} />
+
+        <Route path="/onboarding/callback" element={<CallbackForm />} />
+
+        <Route path="/login" element={<Login />} />
+
+        {/* <Route path="/coordinator-dashboard" element={<CoordinatorDashboard />} />
+
+        <Route path="/super-coordinator-dashboard" element={<SuperCoordinatorDashboard />} /> */}
+
+      </Routes>
+
+      {!hideLayout && <Certificate />}
+      {!hideLayout && <Footer />}
+    </>
+  );
+}
+
 function App() {
   return (
-    <div>     
+    <FormProvider>
       <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="" element={[<Hero />, <Home/>,<Newsletter />,<WhyUs />]} ></Route>
-          <Route path="/About" element={[<About />, <WhyUs />,<Newsletter />]} ></Route>
-          <Route path="/Contact" element={[<Contact />]} ></Route>
-          <Route path="/Services" element={[<Services/>,<Newsletter />]}></Route>
-          <Route path="/Technology" element={[<Technology/>,<Newsletter />]}></Route>
-          <Route path="/Vision" element={[<Vision />,<Newsletter />]}></Route>
-          <Route path="/Awards" element={[<Awards />,<Newsletter />]}></Route>
-         
-        </Routes>
-        <Certificate />
-        <Footer />
-        
+        <Layout />
       </BrowserRouter>
-    </div>
+    </FormProvider>
   );
 }
 

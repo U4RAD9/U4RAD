@@ -1,0 +1,271 @@
+/* ===== Global Form Wrapper ===== */
+.form-wrapper {
+  width: 80%;
+  margin: 40px auto;
+  background: #111; /* Black background */
+  padding: 35px;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.15);
+  color: #fff;
+}
+
+/* ===== Titles ===== */
+.form-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+  color: #ff1a1a; /* Corporate Red */
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #ff3333;
+}
+
+/* ===== Progress Steps ===== */
+.progress-steps {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.step {
+  text-align: center;
+  font-size: 14px;
+}
+
+.circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #ff3333;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.circle.active {
+  background-color: #ff1a1a;
+  color: #fff;
+  border: none;
+  box-shadow: 0 0 10px #ff1a1a;
+}
+
+/* ===== Form Fields ===== */
+.form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  color: #ccc;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  background: #1c1c1c;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #ff1a1a;
+  outline: none;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.4);
+}
+
+textarea {
+  resize: none;
+  height: 70px;
+}
+
+/* ===== Phone Input Styling ===== */
+.phone-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.country-code {
+  padding: 10px;
+  background: #ff1a1a;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* ===== Buttons ===== */
+.button-group {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #b30000, #ff1a1a);
+  color: #fff;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #ff1a1a, #ff4d4d);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+}
+
+.btn-secondary {
+  background: #222;
+  color: #ff1a1a;
+  border: 2px solid #ff1a1a;
+  padding: 10px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-secondary:hover {
+  background: #ff1a1a;
+  color: #fff;
+}
+
+/* ===== Checkbox Styling ===== */
+input[type="checkbox"] {
+  accent-color: #ff1a1a;
+}
+
+/* ===== Smooth Animation ===== */
+.form-wrapper {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.error {
+  color: red;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.phone-input-container .form-control {
+    color: #333 !important; /* Forces black text if the inline style is ignored */
+}
+
+body {
+  background-color: #000;
+}
+
+input, textarea {
+  background-color: #111;
+  color: #fff;
+  border: 2px solid #ff0000;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.react-tel-input .country-list {
+  background-color: #111 !important;
+  color: #fff !important;
+}
+
+.react-tel-input .country-list .country:hover {
+  background-color: #ff0000 !important;
+  color: #fff !important;
+}
+
+.react-tel-input .search-box {
+  background-color: #000 !important;
+  color: #fff !important;
+  border: 1px solid #ff0000 !important;
+}
+
+
+
+
+.photo-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.camera-box {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.webcam-view {
+  width: 320px;
+  border-radius: 8px;
+  border: 2px solid #ff2e2e;
+}
+
+.photo-preview img {
+  margin-top: 15px;
+  width: 150px;
+  border-radius: 8px;
+  border: 2px solid #ff2e2e;
+}
+
+
+
+/* ===== FIX PHONE INPUT WHITE ON WHITE ISSUE ===== */
+
+.react-tel-input .form-control {
+  background-color: #1c1c1c !important;
+  color: #ffffff !important;
+  border: 2px solid #ff0000 !important;
+  width: 100% !important;
+  height: 45px !important;
+  border-radius: 8px !important;
+}
+
+.react-tel-input .flag-dropdown {
+  background-color: #1c1c1c !important;
+  border: 2px solid #ff0000 !important;
+}
+
+.react-tel-input .selected-flag:hover,
+.react-tel-input .selected-flag:focus {
+  background-color: #222 !important;
+}
+
+.react-tel-input .country-list {
+  background-color: #111 !important;
+  color: #fff !important;
+}
+
+.react-tel-input .country-list .country {
+  color: #fff !important;
+}
+
+.react-tel-input .country-list .country.highlight {
+  background-color: #ff0000 !important;
+  color: #fff !important;
+}
+
+.react-tel-input .search-box {
+  background-color: #000 !important;
+  color: #fff !important;
+  border: 1px solid #ff0000 !important;
+}
