@@ -1,23 +1,23 @@
-import React  from 'react';
-import { FaFacebookSquare, FaTwitterSquare, FaLinkedin, FaPhone, FaEnvelope } from 'react-icons/fa';
-import Logo from '../assets/Logo.png'
-// import { useNavigate } from "react-router-dom";
+﻿import {
+  FaEnvelope,
+  FaFacebookSquare,
+  FaLinkedin,
+  FaPhone,
+  FaTwitterSquare,
+  FaWhatsappSquare,
+} from 'react-icons/fa';
+import Logo from '../assets/Logo.png';
 
 const Footer = () => {
-  // const navigate = useNavigate();
-
-  
-  const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLScTov8gEW0wq0o8LJdR275fh2muiDkhnXfzkdey3Gj1VNp9Bw/viewform?usp=sf_link";
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
+  const googleFormUrl =
+    'https://docs.google.com/forms/d/e/1FAIpQLScTov8gEW0wq0o8LJdR275fh2muiDkhnXfzkdey3Gj1VNp9Bw/viewform?usp=sf_link';
 
   const phoneNumber = '+91-9811310922';
   const emailAddress = 'contact@u4rad.com';
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handlePhoneClick = () => {
     window.location.href = `tel:${phoneNumber}`;
@@ -28,101 +28,209 @@ const Footer = () => {
   };
 
   return (
-    <div className="max-w-[1240px] mx-auto py-16 px-4 lg:grid lg:grid-cols-3 gap-8 text-gray-300">
-      <div className="mb-8 lg:mb-0 lg:col-span-1">
-        <h1 className="text-3xl font-bold text-[hsl(357,100%,59%)]">
-          {/* U<span className="text-[red]">4</span>RAD */}
-        </h1>
-        <img
-        className="w-36 md:w-48  my-4 cursor-pointer bg-[#eeeeeecb]  rounded-lg"
-        src={Logo}
-        alt="/"
-        // onClick={() => navigate("/")}
-        onClick={() => scrollToTop()}
-      />
-        <p className="py-4 text-sm">
-          We are a new age radiology-health tech startup revolutionizing the way
-          radiology imaging and case reporting are conducted today!
-        </p>
-        <div className="flex space-x-4 mt-4 ">
-          <a href="https://www.facebook.com/yourpage">
-            <span className="p-2 font-bold hover:text-[hsl(357,100%,59%)] hover:text-text[hsl(357,100%,59%)]-700 transition cursor-pointer"><FaFacebookSquare size={30} /></span>
-            
-          </a>
-          <a href="https://www.twitter.com/yourpage">
-            <span className="p-2 font-bold hover:text-[hsl(357,100%,59%)] hover:text-text[hsl(357,100%,59%)]-700 transition cursor-pointer"><FaTwitterSquare size={30} /></span>
-          </a>
-          <a href="https://www.linkedin.com/company/u4rad-technologies-llp/posts/?feedView=all">
-            <span className="p-2 font-bold hover:text-[hsl(357,100%,59%)] hover:text-text[hsl(357,100%,59%)]-700 transition cursor-pointer"><FaLinkedin size={30} /></span>
-          </a>
-        </div>
-      </div>
+    <footer className="bg-white/80 backdrop-blur-md shadow-glass text-black px-6 py-16">
+      <div className="max-w-[1240px] mx-auto grid lg:grid-cols-3 gap-12">
+        {/* Left Section */}
+        <div>
+          <img
+            src={Logo}
+            alt="U4RAD Logo"
+            className="w-36 md:w-48 mb-4 cursor-pointer rounded-lg bg-[#eeeeeecb]"
+            onClick={scrollToTop}
+          />
+          <p className="text-sm mb-2">
+            We are a new age radiology-health tech startup revolutionizing the
+            way radiology imaging and case reporting are conducted today!
+          </p>
 
-      <div className="lg:col-span-2 grid grid-cols-1 gap-8 lg:grid-cols-3 -mt-10">
-        <div className="lg:col-span-1 mb-2 font-medium text-[hsl(357,100%,59%)] mt-7 text-center">
-          Find Us
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3509.1664389048588!2d77.06294737382665!3d28.414234293963393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d23463d521c01%3A0x9d86bf5abbecf45f!2sXRAi%20Digital!5e0!3m2!1sen!2sin!4v1703012283560!5m2!1sen!2sin"
-            width="100%"
-            height="200"
-            style={{ border: 0 }}
-            allowFullScreen=""
-            loading="lazy"
-            title="Google Maps Location"
-          ></iframe>
+          <div className="text-sm text-gray-700 space-y-1 mt-2">
+  <div><strong>A Unit of:</strong> U4RAD Technologies Pvt Ltd</div>
+  <div><strong>CIN Number:</strong> U86100HR2024PTC120732</div>
+
+  <div>
+    Our Point Of Care Testing Brand:
+    <strong>
+      <a
+        href="https://xraidigital.com"
+        className="text-gray-600 hover:text-primary"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
+        {" "}XRAi Digital Diagnostics
+      </a>
+    </strong>
+  </div>
+
+  {/* Gurgaon Office */}
+  <div className="mt-3 font-semibold">Corporate Office (Gurgaon):</div>
+  <div>C 406, Nirvana Courtyard</div>
+  <div>Sector 50, Gurgaon</div>
+  <div>Haryana, India – 122018</div>
+  <div><strong>Landline:</strong> 0124 425 4012</div>
+
+  {/* Kolkata Office */}
+  <div className="mt-3 font-semibold">Kolkata Office:</div>
+  <div>Room No W109</div>
+  <div>IIM Calcutta Innovation Park</div>
+  <div>IIM Calcutta, Diamond Harbour Road</div>
+  <div>P.O. Joka, Kolkata – 700104</div>
+</div>
+
+
+          {/* Social Icons (All in One Row) */}
+          <div className="flex space-x-4 mt-4">
+            <a
+              href="https://www.facebook.com/yourpage"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-primary"
+            >
+              <FaFacebookSquare size={30} />
+            </a>
+            <a
+              href="https://www.twitter.com/yourpage"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-primary"
+            >
+              <FaTwitterSquare size={30} />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/u4rad-technologies-llp/posts/?feedView=all"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-primary"
+            >
+              <FaLinkedin size={30} />
+            </a>
+            <a
+              href="https://wa.me/9211726688"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-primary"
+            >
+              <FaWhatsappSquare size={30} />
+            </a>
+          </div>
         </div>
 
-        <div className="mx-auto mt-5 text-bottom ">
-          <ul>
-            <li className="p-2 font-bold hover:text-[hsl(357,100%,59%)] hover:text-text[hsl(357,100%,59%)]-700 transition cursor-pointer mt-5">
-              <a href="/" onClick={scrollToTop}>
+        {/* Middle Section */}
+        <div>
+          <h3 className="text-lg font-semibold text-primary mb-4">Explore</h3>
+          <ul className="space-y-3">
+            <li>
+              <a
+                href="/"
+                onClick={scrollToTop}
+                className="hover:text-primary transition font-medium"
+              >
                 Home
               </a>
             </li>
-            <li className="p-2 font-bold hover:text-[hsl(357,100%,59%)] hover:text-text[hsl(357,100%,59%)]-700 transition cursor-pointer">
-              <a href="/Contact" onClick={scrollToTop}>
+            <li>
+              <a
+                href="/Contact"
+                onClick={scrollToTop}
+                className="hover:text-primary transition font-medium"
+              >
                 Contact
               </a>
             </li>
-            <li className="p-2 font-bold hover:text-[hsl(357,100%,59%)] hover:text-text[hsl(357,100%,59%)]-700 transition cursor-pointer">
-              <a href="/Mission" onClick={scrollToTop}>
+            <li>
+              <a
+                href="/Mission"
+                onClick={scrollToTop}
+                className="hover:text-primary transition font-medium"
+              >
                 Mission
               </a>
             </li>
-            <li className="p-2 font-bold hover:text-[hsl(357,100%,59%)] hover:text-text[hsl(357,100%,59%)]-700 transition cursor-pointer">
-              <a href={googleFormUrl} target="_blank" rel="noopener noreferrer">
+            <li>
+              <a
+                href={googleFormUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition font-medium"
+              >
                 Career
               </a>
             </li>
           </ul>
         </div>
-        
-        <div className="mx-auto mt-5">
-          <h6 className="font-medium text-gray-500 text-center mt-10">Contact Us</h6>
-          <ul className="list-disc list-inside">
-            <li
-              className="py-2 text-sm list-none cursor-pointer flex items-center "
-              onClick={handlePhoneClick}
-            >
-              <FaPhone size={15} className="mr-2" />
-              <span className="font-medium p-2 hover:text-[hsl(357,100%,59%)] hover:text-text[hsl(357,100%,59%)]-700 transition cursor-pointer">
-                {phoneNumber}
-              </span>
-            </li>
 
+        {/* Right Section */}
+        <div>
+          <h3 className="text-lg font-semibold text-primary mb-4">Contact</h3>
+          <ul className="space-y-4">
             <li
-              className="py-2 text-sm list-none cursor-pointer flex items-center"
-              onClick={handleEmailClick}
+              onClick={handlePhoneClick}
+              className="flex items-center cursor-pointer text-gray-700 hover:text-primary"
             >
-              <FaEnvelope size={15} className="mr-2" />
-              <span className="font-medium p-2 hover:text-[hsl(357,100%,59%)] hover:text-text[hsl(357,100%,59%)]-700 transition cursor-pointer">
-                {emailAddress}
-              </span>
+              <FaPhone className="mr-2" />
+              <span className="font-medium">{phoneNumber}</span>
+            </li>
+            <li
+              onClick={handleEmailClick}
+              className="flex items-center cursor-pointer text-gray-700 hover:text-primary"
+            >
+              <FaEnvelope className="mr-2" />
+              <span className="font-medium">{emailAddress}</span>
+            </li>
+            {/* Grievance Section */}
+            <li className="text-sm text-gray-700 border-t pt-3">
+              <div className="font-semibold text-primary mb-1">
+                Grievance Officer
+              </div>
+
+              <div className="font-medium">
+                Dr Ruchi Jangra
+              </div>
+
+              <div className="text-gray-600">
+                (Manager: Operations)
+              </div>
+
+              <div
+                onClick={() =>
+                  (window.location.href = 'mailto:drruchi@u4rad.com')
+                }
+                className="flex items-center cursor-pointer hover:text-primary mt-2"
+              >
+                <FaEnvelope className="mr-2" />
+                <span>drruchi@u4rad.com</span>
+              </div>
+
+              <div
+                onClick={() =>
+                  (window.location.href = 'tel:+911244254012')
+                }
+                className="flex items-center cursor-pointer hover:text-primary mt-1"
+              >
+                <FaPhone className="mr-2" />
+                <span>+91 124 425 4012</span>
+              </div>
             </li>
           </ul>
         </div>
       </div>
-    </div>
+
+      {/* Google Maps */}
+      <div className="mt-16">
+        <h3 className="text-lg font-semibold text-primary mb-4 text-center">Find Us</h3>
+        <div className="w-full h-[250px]">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3509.1664389048588!2d77.06294737382665!3d28.414234293963393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d23463d521c01%3A0x9d86bf5abbecf45f!2sXRAi%20Digital!5e0!3m2!1sen!2sin!4v1703012283560!5m2!1sen!2sin"
+            width="100%"
+            height="100%"
+            allowFullScreen
+            loading="lazy"
+            title="U4RAD Office Location"
+            className="rounded-xl border-none shadow-md"
+          ></iframe>
+        </div>
+      </div>
+    </footer>
   );
 };
 
