@@ -9,6 +9,7 @@ import Step5Banking from "../../../components/steps/Step5Banking";
 import Step6ReportingArea from "../../../components/steps/Step6Reporting";
 import Step7TimeAvailability from "../../../components/steps/Step7Availability";
 import Step8Review from "../../../components/steps/Step8Review";
+import { BASE_URL } from "../../apiconnector";
 
 export default function DoctorOnboardingForm() {
   const { formData } = useContext(FormContext);
@@ -82,6 +83,10 @@ export default function DoctorOnboardingForm() {
       // publish_link lives in achievements
       const ach = formData.achievements || {};
       fd.append("publish_link", ach.publishlink || "");
+      fd.append(
+        "achievement_details",
+        JSON.stringify(ach.awards || [])
+      );
 
       /* ══ PERSONAL FILES ══ */
       if (p.resume instanceof File) {
@@ -133,6 +138,57 @@ export default function DoctorOnboardingForm() {
       };
       fd.append("education_details", JSON.stringify(formattedEducation));
 
+      /* ══ DOCUMENTS FROM EDUCATION STEP ══ */
+
+      // 10th
+      if (edu.tenthcertificate instanceof File) {
+        fd.append("tenth_certificate", edu.tenthcertificate);
+      }
+
+      // 12th
+      if (edu.twelthcertificate instanceof File) {
+        fd.append("twelfth_certificate", edu.twelthcertificate);
+      }
+
+      // MBBS
+      if (edu.mbbsdegree instanceof File) {
+        fd.append("mbbs_degree", edu.mbbsdegree);
+      }
+
+      // ⚠️ multiple files → send first OR loop
+      if (edu.mbbsmarksheet) {
+        const file = Array.isArray(edu.mbbsmarksheet)
+          ? edu.mbbsmarksheet[0]
+          : edu.mbbsmarksheet instanceof FileList
+          ? edu.mbbsmarksheet[0]
+          : edu.mbbsmarksheet;
+
+        if (file instanceof File) {
+          fd.append("mbbs_marksheet", file);
+        }
+      }
+
+      // MD
+      if (edu.mddegree instanceof File) {
+        fd.append("md_degree", edu.mddegree);
+      }
+
+      if (edu.mdmarksheet) {
+        if (edu.mdmarksheet instanceof FileList || Array.isArray(edu.mdmarksheet)) {
+          fd.append("md_marksheet", edu.mdmarksheet[0]);
+        }
+      }
+
+      // Registration
+      if (edu.regfile instanceof File) {
+        fd.append("registration_certificate", edu.regfile);
+      }
+
+      // Video
+      if (edu.videofile instanceof File) {
+        fd.append("about_you_video", edu.videofile);
+      }
+
       /* ══ EXPERIENCE ══ */
       const formattedExperience = (formData.experience || []).map((exp) => ({
         institution: exp.institution || "",
@@ -174,7 +230,7 @@ export default function DoctorOnboardingForm() {
       fd.append("availability", JSON.stringify(availPayload));
 
       /* ══ API CALL ══ */
-      const response = await fetch("https://backend.reportingbot.in/api/register/", {
+      const response = await fetch(`${BASE_URL}/register/`, {
         method: "POST",
         body:   fd
       });

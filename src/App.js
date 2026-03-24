@@ -65,8 +65,12 @@ import { FormProvider } from "./components/context/FormContext";
 import DoctorOnboardingForm from "./components/pages/doctoronboarding/form.jsx";
 import CallbackForm from "./components/pages/doctoronboarding/callback.jsx";
 import Onboarding from "./components/pages/doctoronboarding/Onboarding.jsx";
-// import CoordinatorDashboard from "./components/pages/doctoronboarding/CoordinatorDashboard.jsx";
-// import SuperCoordinatorDashboard from "./components/pages/doctoronboarding/SuperCoordinatorDashboard.jsx";
+import CoordinatorDashboard from "./components/pages/doctoronboarding/CoordinatorDashboard.jsx";
+import SuperCoordinatorDashboard from "./components/pages/doctoronboarding/SuperCoordinatorDashboard.jsx";
+import ServiceDashboard from './components/pages/doctoronboarding/ServiceDashboard.jsx';
+import ServiceRates from './components/pages/doctoronboarding/ServiceRates.jsx';
+import CallbackDashboard from './components/pages/doctoronboarding/callbackdashboard.jsx';
+import CustomerDashboard from './components/pages/doctoronboarding/customerdashboard.jsx';
 import Login from "./components/pages/doctoronboarding/Login.jsx";
 
 function Layout() {
@@ -74,8 +78,8 @@ function Layout() {
   const location = useLocation();
 
   const hideLayout =
-    location.pathname === "/coordinator-dashboard" ||
-    location.pathname === "/super-coordinator-dashboard" ||
+    location.pathname.includes("dashboard") ||   // ✅ BEST FIX
+    location.pathname.includes("/services/") ||
     location.pathname === "/login";
 
   return (
@@ -84,31 +88,31 @@ function Layout() {
 
       <Routes>
 
+        {/* ---------- PUBLIC WEBSITE ---------- */}
         <Route path="/" element={<><Hero /><Home /><Newsletter /><WhyUs /></>} />
-
         <Route path="/about" element={<><About /><WhyUs /><Newsletter /></>} />
-
         <Route path="/contact" element={<Contact />} />
-
         <Route path="/services" element={<><Services /><Newsletter /></>} />
-
+        <Route path="/services/:serviceId/rates" element={<ServiceRates />} />
         <Route path="/technology" element={<><Technology /><Newsletter /></>} />
-
         <Route path="/vision" element={<><Vision /><Newsletter /></>} />
-
         <Route path="/awards" element={<><Awards /><Newsletter /></>} />
 
+        {/* ---------- ONBOARDING ---------- */}
         <Route path="/onboarding" element={<Onboarding />} />
-
         <Route path="/onboarding/radiologist" element={<DoctorOnboardingForm />} />
-
         <Route path="/onboarding/callback" element={<CallbackForm />} />
 
+        {/* ---------- AUTH ---------- */}
         <Route path="/login" element={<Login />} />
 
-        {/* <Route path="/coordinator-dashboard" element={<CoordinatorDashboard />} />
+        {/* ---------- DASHBOARDS (MISSING BEFORE) ---------- */}
+        <Route path="/coordinator-dashboard" element={<CoordinatorDashboard />} />
+        <Route path="/super-coordinator-dashboard" element={<SuperCoordinatorDashboard />} />
+        <Route path="/service-dashboard" element={<ServiceDashboard />} />
+        <Route path="/callback-dashboard" element={<CallbackDashboard />} />
+        <Route path="/customer-dashboard" element={<CustomerDashboard />} />
 
-        <Route path="/super-coordinator-dashboard" element={<SuperCoordinatorDashboard />} /> */}
 
       </Routes>
 

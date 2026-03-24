@@ -112,32 +112,52 @@
 
 
 import React, { useState } from "react";
+import { BASE_URL } from "../../apiconnector";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const users = [
-    { email: "coordinator@u4rad.com", password: "123", role: "coordinator" },
-    { email: "super@u4rad.com", password: "123", role: "supercoordinator" }
-  ];
+  // const users = [
+  //   { email: "coordinator@u4rad.com", password: "123", role: "coordinator" },
+  //   { email: "super@u4rad.com", password: "123", role: "supercoordinator" }
+  // ];
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const user = users.find((u) => u.email === email && u.password === password);
 
-    if (!user) {
-      alert("Invalid credentials");
-      return;
-    }
+    try {
+      const res = await fetch(`${BASE_URL}/login/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          username: email,   // ⚠️ your API expects username, not email
+          password: password,
+        }),
+      });
 
-    localStorage.setItem("role", user.role);
+      const data = await res.json();
 
-    if (user.role === "coordinator") {
-      window.location.href = "/coordinator-dashboard";
-    } else if (user.role === "supercoordinator") {
-      // Redirects to the new Super Coordinator tab/route
-      window.location.href = "/super-coordinator-dashboard";
+      if (!res.ok) {
+        alert(data.error || "Login failed");
+        return;
+      }
+
+      // ✅ Store role (IMPORTANT for navigation)
+      localStorage.setItem("role", data.group);
+
+      // ✅ Optional: store user info
+      localStorage.setItem("username", data.username);
+
+      // ✅ Redirect dynamically (BEST PRACTICE)
+      window.location.href = data.dashboard;
+
+    } catch (err) {
+      console.log(err);
+      alert("Server error");
     }
   };
 
