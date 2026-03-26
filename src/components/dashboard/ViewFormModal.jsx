@@ -519,8 +519,8 @@ export default function ViewFormModal({ user, closeModal }) {
             {/* Registration & Video */}
             <div style={{ ...styles.grid, marginTop: "10px" }}>
               <Field label="State Registration Number" value={edu.registration_number} />
-              <LinkField label="Registration File" href={data.registration_file} linkText="View Registration File" />
-              <LinkField label="Video File" href={data.video_file} linkText="View Video" />
+              <LinkField label="Registration File" href={data.registration_certificate} linkText="View Registration File" />
+              <LinkField label="Video File" href={data.about_you_video} linkText="View Video" />
             </div>
           </div>
 
