@@ -631,7 +631,7 @@ export default function ViewFormModal({ user, closeModal }) {
             {/* Day chips */}
             <div style={styles.dayGrid}>
               {days.map((day, i) => (
-                <div key={day} style={styles.dayChip(avail[day])}>
+                <div key={day} style={styles.dayChip(avail[day]?.enabled)}>
                   {dayLabels[i]}
                 </div>
               ))}
@@ -640,27 +640,41 @@ export default function ViewFormModal({ user, closeModal }) {
             {/* Day Yes/No text list */}
             <div style={styles.grid}>
               {days.map((day) => (
-                <BoolField key={day} label={day.charAt(0).toUpperCase() + day.slice(1)} value={avail[day]} />
+                <BoolField key={day} label={day.charAt(0).toUpperCase() + day.slice(1)} value={avail[day]?.enabled} />
               ))}
             </div>
 
             {/* Time Slots */}
             <div style={{ marginTop: "16px" }}>
-              {timeSlotKeys.map((slot, i) => (
-                <div key={i} style={styles.timeSlotCard}>
-                  <div style={styles.timeSlotTitle}>{slot.label}</div>
-                  <div style={styles.timeRow}>
-                    <div style={styles.timeBox}>
-                      <div style={styles.timeLabel}>Start Time</div>
-                      <div style={styles.timeValue}>{slot.start || "—"}</div>
+              {days.map((day) => {
+                const dayData = avail[day];
+
+                if (!dayData?.enabled) return null;
+
+                return (
+                  <div key={day} style={styles.timeSlotCard}>
+                    <div style={styles.timeSlotTitle}>
+                      {day.charAt(0).toUpperCase() + day.slice(1)}
                     </div>
-                    <div style={styles.timeBox}>
-                      <div style={styles.timeLabel}>End Time</div>
-                      <div style={styles.timeValue}>{slot.end || "—"}</div>
+
+                    <div style={styles.timeRow}>
+                      <div style={styles.timeBox}>
+                        <div style={styles.timeLabel}>Start Time</div>
+                        <div style={styles.timeValue}>
+                          {dayData.start || "—"}
+                        </div>
+                      </div>
+
+                      <div style={styles.timeBox}>
+                        <div style={styles.timeLabel}>End Time</div>
+                        <div style={styles.timeValue}>
+                          {dayData.end || "—"}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
