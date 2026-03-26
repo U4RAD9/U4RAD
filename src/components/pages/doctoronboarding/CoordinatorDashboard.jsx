@@ -1083,10 +1083,11 @@ Rate List Details
 
 <td>
 <button
-className="dashboard-btn"
-onClick={()=>sendConfirmationMail(user)}
+  className="dashboard-btn"
+  onClick={()=>sendConfirmationMail(user)}
+  disabled={role === "Coordinator1"}
 >
-Send Mail
+  Send Mail
 </button>
 </td>
 

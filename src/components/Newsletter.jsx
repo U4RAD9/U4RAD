@@ -49,7 +49,7 @@ const Newsletter = () => {
             </button>
           </div>
 
-          {/* Privacy Policy */}
+          {/* Privacy Policy
           <p className='mt-4 text-sm text-gray-300'>
             We care about the protection of your data. Read our{' '}
             <button 
@@ -58,7 +58,7 @@ const Newsletter = () => {
             >
               Privacy Policy
             </button>.
-          </p>
+          </p> */}
 
           {/* Modal */}
           {showPolicy && (

@@ -477,7 +477,7 @@ export default function ViewFormModal({ user, closeModal }) {
                 <Field label="School Name" value={edu.tenth_name} />
                 <Field label="Grade" value={edu.tenth_grade} />
                 <Field label="Passing Year" value={formatDate(edu.tenth_passing_year) || edu.tenth_passing_year} />
-                <LinkField label="10th Certificate" href={edu.tenth_certificate} linkText="View Certificate" />
+                <LinkField label="10th Certificate" href={data.tenth_certificate} linkText="View Certificate" />
               </div>
             </div>
 
@@ -488,7 +488,7 @@ export default function ViewFormModal({ user, closeModal }) {
                 <Field label="School Name" value={edu.twelfth_name} />
                 <Field label="Grade" value={edu.twelfth_grade} />
                 <Field label="Passing Year" value={formatDate(edu.twelfth_passing_year) || edu.twelfth_passing_year} />
-                <LinkField label="12th Certificate" href={edu.twelfth_certificate} linkText="View Certificate" />
+                <LinkField label="12th Certificate" href={data.twelfth_certificate} linkText="View Certificate" />
               </div>
             </div>
 
@@ -499,8 +499,8 @@ export default function ViewFormModal({ user, closeModal }) {
                 <Field label="Institution" value={edu.mbbs_institution} />
                 <Field label="Grade" value={edu.mbbs_grade} />
                 <Field label="Passing Year" value={formatDate(edu.mbbs_passing_year) || edu.mbbs_passing_year} />
-                <LinkField label="MBBS Marksheet" href={edu.mbbs_marksheet} linkText="View Marksheet" />
-                <LinkField label="MBBS Degree" href={edu.mbbs_degree} linkText="View Degree" />
+                <LinkField label="MBBS Marksheet" href={data.mbbs_marksheet} linkText="View Marksheet" />
+                <LinkField label="MBBS Degree" href={data.mbbs_degree} linkText="View Degree" />
               </div>
             </div>
 
@@ -511,16 +511,16 @@ export default function ViewFormModal({ user, closeModal }) {
                 <Field label="Institution" value={edu.md_institution} />
                 <Field label="Grade" value={edu.md_grade} />
                 <Field label="Passing Year" value={formatDate(edu.md_passing_year) || edu.md_passing_year} />
-                <LinkField label="MD Marksheet" href={edu.md_marksheet} linkText="View Marksheet" />
-                <LinkField label="MD Degree" href={edu.md_degree} linkText="View Degree" />
+                <LinkField label="MD Marksheet" href={data.md_marksheet} linkText="View Marksheet" />
+                <LinkField label="MD Degree" href={data.md_degree} linkText="View Degree" />
               </div>
             </div>
 
             {/* Registration & Video */}
             <div style={{ ...styles.grid, marginTop: "10px" }}>
               <Field label="State Registration Number" value={edu.registration_number} />
-              <LinkField label="Registration File" href={edu.registration_file} linkText="View Registration File" />
-              <LinkField label="Video File" href={edu.video_file} linkText="View Video" />
+              <LinkField label="Registration File" href={data.registration_file} linkText="View Registration File" />
+              <LinkField label="Video File" href={data.video_file} linkText="View Video" />
             </div>
           </div>
 
