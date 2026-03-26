@@ -99,7 +99,6 @@ const Navbar = () => {
           >
             Registration
           </Link>
-
           {/* Tooltip */}
           <span className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-white text-blue-600 text-base font-semibold px-4 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
             Point of Care Testing
