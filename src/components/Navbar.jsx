@@ -13,7 +13,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50 flex justify-between items-center bg-white h-24 px-6 lg:px-8 text-black shadow-md">
+    <div className="sticky top-0 left-0 w-full z-50 flex justify-between items-center bg-white h-24 px-6 lg:px-8 text-black shadow-md">
       {/* Logo */}
       <img
         className="w-36 md:w-48 my-4 cursor-pointer"

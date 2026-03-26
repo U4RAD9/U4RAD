@@ -213,19 +213,19 @@ export default function DoctorOnboardingForm() {
          We send the time from the FIRST enabled day so the backend gets
          a valid value. All day booleans are sent correctly.
       ══ */
-      const a    = formData.availability || {};
+      const a = formData.availability || {};
       const days = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"];
 
-      // Build per-day enabled flags
       const availPayload = {};
+
       days.forEach((day) => {
-        availPayload[day] = a[day]?.enabled || false;
+        availPayload[day] = {
+          enabled: a[day]?.enabled || false,
+          start: a[day]?.start || "",
+          end: a[day]?.end || ""
+        };
       });
 
-      // Use the first enabled day's times as the global slot
-      const firstEnabledDay = days.find((d) => a[d]?.enabled);
-      availPayload.start_time = firstEnabledDay ? (a[firstEnabledDay]?.start || "") : "";
-      availPayload.end_time   = firstEnabledDay ? (a[firstEnabledDay]?.end   || "") : "";
 
       fd.append("availability", JSON.stringify(availPayload));
 
