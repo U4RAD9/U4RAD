@@ -758,6 +758,7 @@ const [selectedUser,setSelectedUser] = useState(null);
 const [showForm,setShowForm] = useState(false);
 const [showRate,setShowRate] = useState(false);
 const [search,setSearch] = useState("");
+const [isAuthorized, setIsAuthorized] = useState(true);
 const [messages, setMessages] = useState({
     stage1: {},
     stage2: {}
@@ -775,13 +776,23 @@ useEffect(()=>{
 },[])
 
 function refreshTable(){
-    fetch(`${BASE_URL}/radiologists/full/`)
-    .then(res=>res.json())
-    .then(data=>{
-        setUsers(data);
-        setAllUsers(data); // 🔥 store original
+    fetch(`${BASE_URL}/radiologists/full/`, {
+        credentials: "include" // 🔥 IMPORTANT if using session auth
     })
-    .catch(err=>console.log(err))
+    .then(res => res.json())
+    .then(data => {
+        if (Array.isArray(data)) {
+            setUsers(data);
+            setAllUsers(data);
+            setIsAuthorized(true);
+        } else {
+            console.error("Invalid response:", data);
+            setUsers([]); // fallback
+            setAllUsers([]);
+            setIsAuthorized(false);
+        }
+    })
+    .catch(err => console.log(err))
 }
 
 /* =========================
@@ -893,6 +904,11 @@ function sendConfirmationMail(user){
 function logout(){
     localStorage.removeItem("role");
     navigate("/login");
+}
+
+
+if (!isAuthorized) {
+    return <h2>Unauthorized. Please login.</h2>;
 }
 
 /* =========================
