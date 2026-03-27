@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ReactTyped } from "react-typed";
+import Typed from 'react-typed';
 
 const slides = [
   { type: 'image', src: require('../assets/slide-img.jpeg') },
@@ -87,7 +87,7 @@ const Hero = () => {
             <p className="md:text-5xl sm:text-4xl text-xl font-bold py-4">
               We provide..
             </p>
-            <ReactTyped
+            <Typed
               className="md:text-5xl sm:text-4xl text-xl font-bold md:pl-4 pl-2"
               strings={['24/7 reporting', 'eRaaS', 'SOAS']}
               typeSpeed={120}
