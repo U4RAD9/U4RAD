@@ -777,24 +777,42 @@ useEffect(()=>{
 
 function refreshTable(){
     fetch(`${BASE_URL}/radiologists/full/`, {
-        credentials: "include" // 🔥 IMPORTANT if using session auth
+        credentials: "include"
     })
-    .then(res => res.json())
+    .then(async (res) => {
+
+        if (res.status === 401 || res.status === 403) {
+            setIsAuthorized(false);
+
+            // 🔥 Optional: redirect immediately
+            alert("Session expired. Please login again.");
+            navigate("/login");
+
+            return null;
+        }
+
+        if (!res.ok) {
+            throw new Error("Something went wrong");
+        }
+
+        return res.json();
+    })
     .then(data => {
+        if (!data) return;
+
         if (Array.isArray(data)) {
             setUsers(data);
             setAllUsers(data);
             setIsAuthorized(true);
         } else {
-            console.error("Invalid response:", data);
-            setUsers([]); // fallback
-            setAllUsers([]);
             setIsAuthorized(false);
         }
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+        console.error(err);
+        setIsAuthorized(false);
+    });
 }
-
 /* =========================
    SEARCH FIXED
 ========================= */
