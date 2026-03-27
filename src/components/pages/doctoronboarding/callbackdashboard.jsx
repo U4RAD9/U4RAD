@@ -204,6 +204,111 @@ function CallbackDashboard() {
             box-shadow: 0 2px 12px ${t.accentGlow};
         }
 
+        /* ── Modal Overlay ── */
+        .cb-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.55);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* ── Modal Box ── */
+        .cb-modal {
+            width: 520px;
+            max-width: 90%;
+            background: ${t.cardBg};
+            border: 1px solid ${t.borderMain};
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+            animation: fadeIn 0.2s ease;
+        }
+
+        /* Header */
+        .cb-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .cb-modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: ${t.textPrimary};
+        }
+
+        /* Close button */
+        .cb-close-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: ${t.textSecondary};
+        }
+        .cb-close-btn:hover {
+            color: ${t.accent};
+        }
+
+        /* Content */
+        .cb-modal-content p {
+            font-size: 14px;
+            color: ${t.textSecondary};
+            margin-bottom: 8px;
+        }
+
+        .cb-modal-content strong {
+            color: ${t.textPrimary};
+        }
+
+        /* Modalities */
+        .cb-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .cb-tag {
+            padding: 4px 10px;
+            font-size: 12px;
+            border-radius: 20px;
+            background: ${t.accentBadgeBg};
+            color: ${t.accent};
+            border: 1px solid rgba(220,38,38,0.25);
+        }
+
+        /* Footer */
+        .cb-modal-footer {
+            margin-top: 18px;
+            text-align: right;
+        }
+
+        .cb-close-main-btn {
+            padding: 8px 16px;
+            background: ${t.accent};
+            border: none;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .cb-close-main-btn:hover {
+            background: ${t.accentHover};
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
         /* Empty state */
         .cb-empty {
             text-align: center; padding: 56px 24px;
@@ -295,57 +400,50 @@ function CallbackDashboard() {
                     </table>
                 </div>
                 {selectedCallback && (
-                    <div style={{
-                        position: "fixed",
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        background: "rgba(0,0,0,0.5)",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        zIndex: 1000
-                    }}>
-                        <div style={{
-                            background: "#fff",
-                            padding: "25px",
-                            borderRadius: "10px",
-                            width: "500px"
-                        }}>
-                            <h3>Callback Details</h3>
+    <div className="cb-modal-overlay">
+        <div className="cb-modal">
 
-                            <p><strong>Name:</strong> {selectedCallback.name}</p>
-                            <p><strong>Email:</strong> {selectedCallback.email}</p>
-                            <p><strong>Phone:</strong> {selectedCallback.phone_number}</p>
-                            <p><strong>Qualification:</strong> {selectedCallback.qualification}</p>
-                            <p><strong>Experience:</strong> {selectedCallback.experience} years</p>
+            {/* Header */}
+            <div className="cb-modal-header">
+                <div className="cb-modal-title">Callback Details</div>
+                <button
+                    className="cb-close-btn"
+                    onClick={() => setSelectedCallback(null)}
+                >
+                    ✕
+                </button>
+            </div>
 
-                            <p><strong>Modalities:</strong></p>
-                            <ul>
-                                {selectedCallback.ct && <li>CT</li>}
-                                {selectedCallback.mri && <li>MRI</li>}
-                                {selectedCallback.xray && <li>X-Ray</li>}
-                                {selectedCallback.mammography && <li>Mammography</li>}
-                            </ul>
+            {/* Content */}
+            <div className="cb-modal-content">
+                <p><strong>Name:</strong> {selectedCallback.name}</p>
+                <p><strong>Email:</strong> {selectedCallback.email}</p>
+                <p><strong>Phone:</strong> {selectedCallback.phone_number}</p>
+                <p><strong>Qualification:</strong> {selectedCallback.qualification}</p>
+                <p><strong>Experience:</strong> {selectedCallback.experience} years</p>
 
-                            <button
-                                onClick={() => setSelectedCallback(null)}
-                                style={{
-                                    marginTop: "15px",
-                                    padding: "8px 15px",
-                                    background: "#dc2626",
-                                    color: "#fff",
-                                    border: "none",
-                                    borderRadius: "6px",
-                                    cursor: "pointer"
-                                }}
-                            >
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                )}
+                <p><strong>Modalities:</strong></p>
+                <div className="cb-tags">
+                    {selectedCallback.ct && <span className="cb-tag">CT</span>}
+                    {selectedCallback.mri && <span className="cb-tag">MRI</span>}
+                    {selectedCallback.xray && <span className="cb-tag">X-Ray</span>}
+                    {selectedCallback.mammography && <span className="cb-tag">Mammography</span>}
+                </div>
+            </div>
+
+            {/* Footer */}
+            <div className="cb-modal-footer">
+                <button
+                    className="cb-close-main-btn"
+                    onClick={() => setSelectedCallback(null)}
+                >
+                    Close
+                </button>
+            </div>
+
+        </div>
+    </div>
+)}
 
             </div>
         </>
