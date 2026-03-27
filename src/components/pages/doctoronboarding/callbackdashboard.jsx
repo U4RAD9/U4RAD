@@ -5,12 +5,28 @@ import { BASE_URL } from "../../apiconnector";
 function CallbackDashboard() {
     const [callbacks, setCallbacks] = useState([]);
     const [darkMode, setDarkMode] = useState(false);
+    const [selectedCallback, setSelectedCallback] = useState(null);
 
     const navigate = useNavigate();
 
     useEffect(() => {
         fetchCallbacks();
     }, []);
+
+    async function fetchCallbackDetail(id) {
+        try {
+            const res = await fetch(`${BASE_URL}/callback/${id}/`);
+            const data = await res.json();
+
+            if (res.ok) {
+                setSelectedCallback(data); // ✅ store selected form
+            } else {
+                console.error(data);
+            }
+        } catch (err) {
+            console.error(err);
+        }
+        }
 
     function goBack() {
         const role = localStorage.getItem("role");
@@ -267,7 +283,7 @@ function CallbackDashboard() {
                                         <td>
                                             <button
                                                 className="cb-view-btn"
-                                                onClick={() => navigate(`/callback/${cb.id}`)}
+                                                onClick={() => fetchCallbackDetail(cb.id)}
                                             >
                                                 👁 View Form
                                             </button>
@@ -278,6 +294,58 @@ function CallbackDashboard() {
                         </tbody>
                     </table>
                 </div>
+                {selectedCallback && (
+                    <div style={{
+                        position: "fixed",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        background: "rgba(0,0,0,0.5)",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        zIndex: 1000
+                    }}>
+                        <div style={{
+                            background: "#fff",
+                            padding: "25px",
+                            borderRadius: "10px",
+                            width: "500px"
+                        }}>
+                            <h3>Callback Details</h3>
+
+                            <p><strong>Name:</strong> {selectedCallback.name}</p>
+                            <p><strong>Email:</strong> {selectedCallback.email}</p>
+                            <p><strong>Phone:</strong> {selectedCallback.phone_number}</p>
+                            <p><strong>Qualification:</strong> {selectedCallback.qualification}</p>
+                            <p><strong>Experience:</strong> {selectedCallback.experience} years</p>
+
+                            <p><strong>Modalities:</strong></p>
+                            <ul>
+                                {selectedCallback.ct && <li>CT</li>}
+                                {selectedCallback.mri && <li>MRI</li>}
+                                {selectedCallback.xray && <li>X-Ray</li>}
+                                {selectedCallback.mammography && <li>Mammography</li>}
+                            </ul>
+
+                            <button
+                                onClick={() => setSelectedCallback(null)}
+                                style={{
+                                    marginTop: "15px",
+                                    padding: "8px 15px",
+                                    background: "#dc2626",
+                                    color: "#fff",
+                                    border: "none",
+                                    borderRadius: "6px",
+                                    cursor: "pointer"
+                                }}
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                )}
 
             </div>
         </>

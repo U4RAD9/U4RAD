@@ -158,31 +158,33 @@ useEffect(() => {
   async function fetchRates() {
     try {
       const res = await fetch(
-        `${BASE_URL}/rate-list/${user.id}/`
+        `${BASE_URL}/get-rate-list/${user.id}/`
       );
 
       if (!res.ok) return;
 
       const data = await res.json();
 
+      const r = data.rate_list;
+
       const mappedRates = [
-        { modality:"MRI", caseType:"Head/Brain/Chest/Abdomen/Pelvis/PNS/Face", rate:data.mri1 },
-        { modality:"MRI", caseType:"MRI Screening(per body parts)", rate:data.mri2 },
-        { modality:"MRI", caseType:"MSK", rate:data.mri3 },
-        { modality:"MRI", caseType:"Whole Abdomen", rate:data.mri4 },
-        { modality:"MRI", caseType:"Special Cases(ex. Neurography, Defacography, Breast)", rate:data.mri5 },
-        { modality:"MRI", caseType:"MRI Angiography(per body parts)", rate:data.mri6 },
+        { modality:"MRI", caseType:"Head/Brain/Chest/Abdomen/Pelvis/PNS/Face", rate:r.mri1 },
+        { modality:"MRI", caseType:"MRI Screening(per body parts)", rate:r.mri2 },
+        { modality:"MRI", caseType:"MSK", rate:r.mri3 },
+        { modality:"MRI", caseType:"Whole Abdomen", rate:r.mri4 },
+        { modality:"MRI", caseType:"Special Cases(ex. Neurography, Defacography, Breast)", rate:r.mri5 },
+        { modality:"MRI", caseType:"MRI Angiography(per body parts)", rate:r.mri6 },
 
-        { modality:"CT", caseType:"Head/Brain/PNS/Face/Orbit", rate:data.ct1 },
-        { modality:"CT", caseType:"NCCT Spine", rate:data.ct2 },
-        { modality:"CT", caseType:"HRCT Chest/KUB", rate:data.ct3 },
-        { modality:"CT", caseType:"Abdomen/Pelvis/Neck", rate:data.ct4 },
-        { modality:"CT", caseType:"Whole Abdomen", rate:data.ct5 },
-        { modality:"CT", caseType:"CT Angiography(per body parts)", rate:data.ct6 },
-        { modality:"CT", caseType:"Cardiac Angiography", rate:data.ct7 },
+        { modality:"CT", caseType:"Head/Brain/PNS/Face/Orbit", rate:r.ct1 },
+        { modality:"CT", caseType:"NCCT Spine", rate:r.ct2 },
+        { modality:"CT", caseType:"HRCT Chest/KUB", rate:r.ct3 },
+        { modality:"CT", caseType:"Abdomen/Pelvis/Neck", rate:r.ct4 },
+        { modality:"CT", caseType:"Whole Abdomen", rate:r.ct5 },
+        { modality:"CT", caseType:"CT Angiography(per body parts)", rate:r.ct6 },
+        { modality:"CT", caseType:"Cardiac Angiography", rate:r.ct7 },
 
-        { modality:"X-Ray", caseType:"Per Exposure - any body parts", rate:data.xray1 },
-        { modality:"X-Ray", caseType:"Special Procedure - Barium/IVP/HSG", rate:data.xray2 }
+        { modality:"X-Ray", caseType:"Per Exposure - any body parts", rate:r.xray1 },
+        { modality:"X-Ray", caseType:"Special Procedure - Barium/IVP/HSG", rate:r.xray2 }
       ];
 
       setRates(mappedRates);
@@ -284,7 +286,7 @@ return(
 <input
 type="number"
 value={r.rate}
-onChange={(e)=>handleChange(i,e.target.value)}
+onChange={(e)=>handleChange(i, Number(e.target.value))}
 style={{
 width:"120px",
 padding:"6px"

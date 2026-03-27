@@ -72,6 +72,8 @@ import ServiceRates from './components/pages/doctoronboarding/ServiceRates.jsx';
 import CallbackDashboard from './components/pages/doctoronboarding/callbackdashboard.jsx';
 import CustomerDashboard from './components/pages/doctoronboarding/customerdashboard.jsx';
 import Login from "./components/pages/doctoronboarding/Login.jsx";
+import RateList from './components/pages/doctoronboarding/RatelistRadiologist.jsx';
+import RadiologistDashboard from './components/pages/doctoronboarding/RadiologistDashboard.jsx';
 
 function Layout() {
 
@@ -80,7 +82,8 @@ function Layout() {
   const hideLayout =
     location.pathname.includes("dashboard") ||   // ✅ BEST FIX
     location.pathname.includes("/services/") ||
-    location.pathname === "/login";
+    location.pathname === "/login" ||
+    location.pathname.includes("/rate-list/");
 
   return (
     <>
@@ -102,6 +105,7 @@ function Layout() {
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/onboarding/radiologist" element={<DoctorOnboardingForm />} />
         <Route path="/onboarding/callback" element={<CallbackForm />} />
+        <Route path="/rate-list/:id" element={<RateList />} />
 
         {/* ---------- AUTH ---------- */}
         <Route path="/login" element={<Login />} />
@@ -112,6 +116,7 @@ function Layout() {
         <Route path="/service-dashboard" element={<ServiceDashboard />} />
         <Route path="/callback-dashboard" element={<CallbackDashboard />} />
         <Route path="/customer-dashboard" element={<CustomerDashboard />} />
+        <Route path="/doctor-dashboard" element={<RadiologistDashboard />} />
 
 
       </Routes>

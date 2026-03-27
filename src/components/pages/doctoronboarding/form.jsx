@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect, useCallback } from "react";
 import { FormContext } from "../../context/FormContext";
+import { useNavigate } from "react-router-dom";
 
 import Step1Personal from "../../../components/steps/Step1Personal";
 import Step2Education from "../../../components/steps/Step2Education";
@@ -19,6 +20,8 @@ export default function DoctorOnboardingForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading]     = useState(false);
   const [errorMsg, setErrorMsg]   = useState("");
+  const [apiData, setApiData] = useState(null);
+  const navigate = useNavigate();
 
   const totalSteps = 8;
   const progress   = Math.round(((step - 1) / (totalSteps - 1)) * 100);
@@ -251,6 +254,8 @@ export default function DoctorOnboardingForm() {
       }
 
       console.log("Registration Success:", resData);
+      console.log("API RESPONSE FULL:", resData);
+      setApiData(resData); 
       setSubmitted(true);
       setLoading(false);
 
@@ -266,10 +271,23 @@ export default function DoctorOnboardingForm() {
     return (
       <div className="form-wrapper" style={{ textAlign: "center", padding: "60px 40px" }}>
         <div style={{ fontSize: "60px", marginBottom: "20px" }}>🎉</div>
+
         <h2 className="form-title">Registration Successful!</h2>
+
         <p style={{ color: "#aaa", marginTop: "10px" }}>
-          Your onboarding form has been submitted. Our team will reach out to you shortly.
+          Your onboarding form has been submitted.
         </p>
+
+        {/* ✅ NEW BUTTON */}
+        <button
+          className="btn-primary"
+          style={{ marginTop: "25px" }}
+          onClick={() =>
+            navigate(`/rate-list/${apiData?.id}`)
+          }
+        >
+          Continue to Rate List →
+        </button>
       </div>
     );
   }

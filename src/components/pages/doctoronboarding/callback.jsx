@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BASE_URL } from "../../apiconnector";
 
 export default function CallbackForm() {
   const [data, setData] = useState({
@@ -39,10 +40,58 @@ export default function CallbackForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Callback Form Data:", data);
-    alert("Callback request submitted successfully!");
+
+    // 🔥 Convert frontend data → backend format
+    const payload = {
+      name: data.name,
+      phone_number: data.phone_number,
+      email: data.email,
+      qualification: data.qualification,
+      experience: data.experience,
+      ct: data.ctcheckbox,
+      mri: data.mricheckbox,
+      xray: data.xraycheckbox,
+      mammography: data.mammographycheckbox,
+    };
+
+    try {
+      const response = await fetch(`${BASE_URL}/callback-request/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert("✅ Callback request submitted successfully!");
+
+        // Optional: reset form
+        setData({
+          name: "",
+          phone_number: "",
+          email: "",
+          qualification: "",
+          experience: "",
+          ctcheckbox: false,
+          mricheckbox: false,
+          xraycheckbox: false,
+          mammographycheckbox: false,
+        });
+
+      } else {
+        console.error(result);
+        alert("❌ Error submitting form");
+      }
+
+    } catch (error) {
+      console.error(error);
+      alert("❌ Server error");
+    }
   };
 
   return (
