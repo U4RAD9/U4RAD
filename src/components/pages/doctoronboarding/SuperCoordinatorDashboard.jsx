@@ -497,6 +497,8 @@ const [selectedUser,setSelectedUser] = useState(null);
 const [showForm,setShowForm] = useState(false);
 const [showRate,setShowRate] = useState(false);
 const [search,setSearch] = useState("");
+const [allUsers, setAllUsers] = useState([]); // 🔥 IMPORTANT
+const [isAuthorized, setIsAuthorized] = useState(true);
 const [messages, setMessages] = useState({
     stage1: {},
     stage2: {}
@@ -508,23 +510,65 @@ useEffect(()=>{
     refreshTable();
 },[])
 
-function refreshTable(){
-    fetch(`${BASE_URL}/radiologists/full/`)
-    .then(res=>res.json())
-    .then(data=>{
-        setUsers(data)
+function refreshTable() {
+    fetch(`${BASE_URL}/radiologists/full/`, {
+        credentials: "include"
     })
-    .catch(err=>console.log(err))
+    .then(async (res) => {
+
+        // 🔥 HANDLE AUTH FAILURE
+        if (res.status === 401 || res.status === 403) {
+            setIsAuthorized(false);
+            alert("Session expired. Please login again.");
+            navigate("/login");
+            return null;
+        }
+
+        if (!res.ok) {
+            throw new Error("Something went wrong");
+        }
+
+        return res.json();
+    })
+    .then(data => {
+        if (!data) return;
+
+        // 🔥 CRITICAL FIX
+        if (Array.isArray(data)) {
+            setUsers(data);
+            setAllUsers(data); // for search
+            setIsAuthorized(true);
+        } else {
+            console.error("Not array:", data);
+            setUsers([]);
+            setAllUsers([]);
+            setIsAuthorized(false);
+        }
+    })
+    .catch(err => {
+        console.error("Fetch failed:", err);
+        setUsers([]);
+        setAllUsers([]);
+        setIsAuthorized(false);
+    });
 }
 
+
 function searchUser(value){
-    setSearch(value)
-    const filtered = users.filter(user =>
+    setSearch(value);
+
+    if (value === "") {
+        setUsers(allUsers);
+        return;
+    }
+
+    const filtered = allUsers.filter(user =>
         (`${user.first_name} ${user.last_name}`)
         .toLowerCase()
         .includes(value.toLowerCase())
-    )
-    setUsers(filtered)
+    );
+
+    setUsers(filtered);
 }
 
 function openForm(user){
@@ -597,6 +641,10 @@ function sendConfirmationMail(user){
 function logout(){
     localStorage.removeItem("role");
     navigate("/login");
+}
+
+if (!isAuthorized) {
+    return <h2>Unauthorized. Please login.</h2>;
 }
 
 return(
