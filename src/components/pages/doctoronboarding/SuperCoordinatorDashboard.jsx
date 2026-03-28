@@ -628,14 +628,14 @@ function updateStage2(user,value){
 }
 
 function sendConfirmationMail(user){
-    fetch(`PASTE_EMAIL_API_HERE/${user.id}/`, {
-        method: "POST"
+    fetch(`${BASE_URL}/send-confirmation-mail/${user.id}/`, {
+        method:"POST"
     })
-    .then(res => res.json())
-    .then(() => {
-        alert("Confirmation email sent successfully to " + user.email);
+    .then(res=>res.json())
+    .then(()=>{
+        alert("Mail sent to " + user.email);
     })
-    .catch(() => alert("Error sending mail"));
+    .catch(()=>alert("Error sending mail"));
 }
 
 function logout(){
