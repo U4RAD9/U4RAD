@@ -583,7 +583,7 @@ export default function ViewFormModal({ user, closeModal }) {
             <div style={{ ...styles.grid, marginTop: "14px" }}>
               <LinkField label="Pan Card" href={banking.pan_card} linkText="View Pan Card" />
               <LinkField label="Aadhar Card" href={banking.aadhar_card} linkText="View Aadhar Card" />
-              <LinkField label="Cancelled cheque/Bank details" href={banking.cheque} linkText="View Cheque" />
+              <LinkField label="Cancelled cheque/Bank details" href={banking.cheque} linkText="View Cancelled cheque/Bank details" />
             </div>
           </div>
 
