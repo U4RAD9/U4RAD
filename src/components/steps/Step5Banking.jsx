@@ -381,7 +381,7 @@ export default function Step5Banking() {
       </div>
 
       <div className="form-group">
-        <label>Upload Cancelled Cheque</label>
+        <label>Upload Cancelled cheque/Bank details</label>
         <input type="file" name="chequeFile" onChange={handleChange} />
       </div>
     </div>
