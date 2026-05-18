@@ -1,1 +1,1 @@
-export const BASE_URL = "https://test.reportingbot.in/api"
+export const BASE_URL = "http://localhost:8000/api"

@@ -230,7 +230,7 @@ export default function Step1Personal() {
 
       {/* ── Password ── */}
       <div className="form-group">
-        <label>Password</label>
+        <label>Create Password</label>
         <div style={{ position: "relative" }}>
           <input
             name="password"

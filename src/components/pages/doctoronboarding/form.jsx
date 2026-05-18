@@ -83,13 +83,28 @@ export default function DoctorOnboardingForm() {
       fd.append("contact_number",      p.phone       || "");
       fd.append("years_of_experience", p.experience  || "");
 
-      // publish_link lives in achievements
-      const ach = formData.achievements || {};
-      fd.append("publish_link", ach.publishlink || "");
-      fd.append(
-        "achievement_details",
-        JSON.stringify(ach.awards || [])
-      );
+    
+      /* ══ ACHIEVEMENTS ══ */
+
+        const ach = formData.achievements || {};
+
+        // Publish Link
+        fd.append(
+          "publish_link",
+          ach.publishlink || ""
+        );
+
+        // Awards
+        fd.append(
+          "achievement_details",
+          JSON.stringify(ach.awards || [])
+        );
+
+        // NEW FELLOWSHIPS
+        fd.append(
+          "fellowship_details",
+          JSON.stringify(ach.fellowships || [])
+        );
 
       /* ══ PERSONAL FILES ══ */
       if (p.resume instanceof File) {
@@ -114,9 +129,17 @@ export default function DoctorOnboardingForm() {
       fd.append("pan_card_number",     b.panCardNumber      || "");
       fd.append("aadhar_card_number",  b.aadharCardNumber   || "");
 
+      // NEW INSURANCE FIELDS
+      fd.append("indemnity_insurance_name",b.indemnityInsuranceName || "");
+      fd.append("indemnity_coverage",b.indemnityCoverage || "");
+
+
       if (b.panCardFile    instanceof File) fd.append("pan_card_file",    b.panCardFile);
       if (b.aadharCardFile instanceof File) fd.append("aadhar_card_file", b.aadharCardFile);
       if (b.chequeFile     instanceof File) fd.append("cheque_file",      b.chequeFile);
+
+      // NEW INSURANCE FILE
+      if (b.indemnityFile instanceof File) {fd.append("indemnity_file",b.indemnityFile);}
 
       /* ══ EDUCATION ══ */
       const edu = formData.education || {};
@@ -200,16 +223,42 @@ export default function DoctorOnboardingForm() {
       }));
       fd.append("experience_details", JSON.stringify(formattedExperience));
 
-      /* ══ REPORTING AREA ══ */
-      const r = formData.reporting || {};
-      const formattedReporting = {
-        mri_options:        r.mriopt   || [],
-        ct_options:         r.ctopt    || [],
-        xray:               r.xray     || false,
-        others:             r.other    || false,
-        others_description: r.otherText || ""
-      };
-      fd.append("reporting_area", JSON.stringify(formattedReporting));
+    /* ══ REPORTING AREA ══ */
+
+        const r = formData.reporting || {};
+
+        const formattedReporting = {
+
+          mri_options:
+            r.mriopt || [],
+
+          ct_options:
+            r.ctopt || [],
+
+          // NEW SUBSPECIALITY
+          subspeciality:
+            r.subspeciality || [],
+
+          mri_others:
+            r.mriothers || "",
+
+          ct_others:
+            r.ctothers || "",
+
+          xray:
+            r.xray || false,
+
+          others:
+            r.other || false,
+
+          others_description:
+            r.otherText || ""
+        };
+
+        fd.append(
+          "reporting_area",
+          JSON.stringify(formattedReporting)
+        );
 
       /* ══ AVAILABILITY ══
          Backend expects per-day booleans + a single start_time / end_time.

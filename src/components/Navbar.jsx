@@ -67,13 +67,19 @@ const Navbar = () => {
           Contact
         </li>
         <li className="p-4 font-bold hover:text-[hsl(357,100%,59%)] cursor-pointer">
-          <a
+          <Link
+            to="/career"
+            // className="px-4 py-2 bg-blue-600 text-white rounded"
+          >
+            Join Us
+          </Link>
+          {/* <a
             href="https://docs.google.com/forms/d/e/1FAIpQLScTov8gEW0wq0o8LJdR275fh2muiDkhnXfzkdey3Gj1VNp9Bw/viewform?usp=sf_link"
             target="_blank"
             rel="noopener noreferrer"
           >
             Career
-          </a>
+          </a> */}
         </li>
 
         {/* ✅ POCT Button with Tooltip Below */}
@@ -97,7 +103,7 @@ const Navbar = () => {
             to="/onboarding"
             className="px-4 py-2 bg-blue-600 text-white rounded"
           >
-            Registration
+            Client Registration
           </Link>
           {/* Tooltip */}
           <span className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-white text-blue-600 text-base font-semibold px-4 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">

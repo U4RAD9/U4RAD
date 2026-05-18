@@ -1,7 +1,8 @@
+
 import { useNavigate } from "react-router-dom";
 import "./onboarding.css";
 
-export default function Onboarding() {
+export default function Career() {
 
   const navigate = useNavigate();
 
@@ -17,30 +18,33 @@ export default function Onboarding() {
         </h1>
 
         <p className="onboarding-subtitle">
-          {/* Please select how you would like to continue */}
+          Please select how you would like to continue
         </p>
 
         <div className="card-wrapper">
 
           {/* CLIENT */}
 
-          <div
-            className="role-card"
-            onClick={() => navigate("/onboarding/client")}
-          >
+         <div
+           className="role-card"
+           onClick={() => window.open(
+             "https://docs.google.com/forms/d/e/1FAIpQLScTov8gEW0wq0o8LJdR275fh2muiDkhnXfzkdey3Gj1VNp9Bw/viewform?usp=sf_link",
+             "_blank"
+           )}
+         >
 
-            <div className="icon">🏥</div>
+            <div className="icon">💼</div>
 
-            <h3>Client</h3>
+            <h3>Career Opportunities</h3>
 
-            <p>Hospitals & Diagnostic Centers</p>
+            <p>Join Us</p>
 
           </div>
 
 
           {/* RADIOLOGIST */}
 
-          {/* <div
+          <div
             className="role-card"
             onClick={() => navigate("/onboarding/radiologist")}
           >
@@ -49,16 +53,16 @@ export default function Onboarding() {
 
             <h3>Radiologist</h3>
 
-            <p>Join our expert reporting panel</p>
+            <p>Radiologist expert reporting panel</p>
 
-          </div> */}
+          </div>
 
         </div>
 
 
         {/* LOGIN BUTTON */}
 
-        {/* <div className="login">
+        <div className="login">
 
           <button
             className="login-btn"
@@ -68,7 +72,7 @@ export default function Onboarding() {
 
           </button>
 
-        </div> */}
+        </div>
 
       </div>
 

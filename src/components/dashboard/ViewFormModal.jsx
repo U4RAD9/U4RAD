@@ -1,115 +1,3 @@
-// import React from "react";
-// import "./modal.css";
-
-// export default function ViewFormModal({formData,closeModal}){
-
-// if(!formData) return null;
-
-// return(
-
-// <div className="modal-overlay">
-
-// <div className="modal-box">
-
-// <div className="modal-header">
-// <h2>Complete Form Details</h2>
-// <button onClick={closeModal}>✖</button>
-// </div>
-
-// <div className="modal-content">
-
-// <h3 className="section">Personal Information</h3>
-
-// <p><b>First Name:</b> {formData.first_name}</p>
-// <p><b>Last Name:</b> {formData.last_name}</p>
-// <p><b>Email:</b> {formData.email}</p>
-// <p><b>Contact:</b> {formData.contact}</p>
-// <p><b>Address:</b> {formData.address}</p>
-
-// <p>
-// <b>Resume:</b>
-// <a href={formData.resume} target="_blank" rel="noreferrer">
-// View Resume
-// </a>
-// </p>
-
-// <p>
-// <b>Photo:</b>
-// <a href={formData.photo} target="_blank" rel="noreferrer">
-// View Photo
-// </a>
-// </p>
-
-// <h3 className="section">Educational Details</h3>
-
-// <p><b>10th School Name:</b> {formData.school10}</p>
-// <p><b>10th Grade:</b> {formData.grade10}</p>
-// <p><b>10th Passing Year:</b> {formData.year10}</p>
-
-// </div>
-
-// </div>
-
-// </div>
-
-// );
-
-// }
-
-
-
-// import React from "react";
-// import "./modal.css";
-
-// export default function ViewFormModal({user,closeModal}){
-
-// return(
-
-// <div className="modal-overlay">
-
-// <div className="modal-box">
-
-// <h2>Complete Form Details</h2>
-
-// <p><b>First Name:</b> {user.first_name}</p>
-// <p><b>Last Name:</b> {user.last_name}</p>
-// <p><b>Email:</b> {user.email}</p>
-// <p><b>Contact:</b> {user.contact}</p>
-// <p><b>Address:</b> {user.address}</p>
-
-// <p>
-
-// <b>Resume:</b>
-
-// <a href={user.resume} target="_blank">
-// View Resume
-// </a>
-
-// </p>
-
-// <p>
-
-// <b>Photo:</b>
-
-// <a href={user.photo} target="_blank">
-// View Photo
-// </a>
-
-// </p>
-
-// <button onClick={closeModal}>
-// Close
-// </button>
-
-// </div>
-
-// </div>
-
-// );
-
-// }
-
-
 import React from "react";
 
 // Theme: Red (#c8102e), Black (#1a1a1a), White (#ffffff)
@@ -417,6 +305,8 @@ export default function ViewFormModal({ user, closeModal }) {
   const experiences = Array.isArray(data?.experience_details) ? data.experience_details : [];
   const achievements = Array.isArray(data?.achievement_details) ? data.achievement_details : [];
 
+  const fellowships = Array.isArray(data?.fellowship_details) ? data.fellowship_details : [];
+
   const days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
   const dayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -544,86 +434,295 @@ export default function ViewFormModal({ user, closeModal }) {
             )}
           </div>
 
-          {/* ── Achievement Details ── */}
-          <div style={styles.section}>
-            <SectionTitle>Achievement Details</SectionTitle>
-            {achievements.length === 0 && !data?.publish_link ? (
-              <span style={styles.emptyState}>No achievements added.</span>
-            ) : (
-              <>
-                {achievements.map((ach, i) => (
-                  <div key={i} style={styles.achCard}>
-                    <div style={styles.eduGrid}>
-                      <Field label={`Award ${i + 1}`} value={ach.award || ach.name || ach.title} />
-                      <Field label={`Award Date ${i + 1}`} value={formatDate(ach.date || ach.award_date) || ach.date || ach.award_date} />
-                    </div>
-                  </div>
-                ))}
-                {data?.publish_link && (
-                  <div style={{ marginTop: achievements.length ? "10px" : "0" }}>
-                    <LinkField label="Publish Link" href={data.publish_link} linkText={data.publish_link} />
-                  </div>
-                )}
-              </>
-            )}
+{/* ── Achievement Details ── */}
+<div style={styles.section}>
+  <SectionTitle>Achievement Details</SectionTitle>
+
+  {achievements.length === 0 &&
+  fellowships.length === 0 &&
+  !data?.publish_link ? (
+    <span style={styles.emptyState}>
+      No achievements added.
+    </span>
+  ) : (
+    <>
+      {/* Awards */}
+
+      {achievements.map((ach, i) => (
+        <div key={i} style={styles.achCard}>
+          <div style={styles.eduGrid}>
+            <Field
+              label={`Award ${i + 1}`}
+              value={
+                ach.award ||
+                ach.name ||
+                ach.title
+              }
+            />
+
+            <Field
+              label={`Award Date ${i + 1}`}
+              value={
+                formatDate(
+                  ach.date || ach.award_date
+                ) ||
+                ach.date ||
+                ach.award_date
+              }
+            />
           </div>
+        </div>
+      ))}
+
+      {/* ========================
+          FELLOWSHIPS
+      ======================== */}
+
+      {fellowships.map((fellowship, i) => (
+        <div key={i} style={styles.achCard}>
+          <div style={styles.eduCardTitle}>
+            Fellowship {i + 1}
+          </div>
+
+          <div style={styles.eduGrid}>
+            <Field
+              label="Fellowship Name"
+              value={fellowship.name}
+            />
+
+            <Field
+              label="Institute"
+              value={fellowship.institute}
+            />
+
+            <Field
+              label="Year"
+              value={fellowship.year}
+            />
+          </div>
+        </div>
+      ))}
+
+      {/* Publish Link */}
+
+      {data?.publish_link && (
+        <div
+          style={{
+            marginTop:
+              achievements.length ||
+              fellowships.length
+                ? "10px"
+                : "0",
+          }}
+        >
+          <LinkField
+            label="Publish Link"
+            href={data.publish_link}
+            linkText={data.publish_link}
+          />
+        </div>
+      )}
+    </>
+  )}
+</div>
 
           {/* ── Banking Details ── */}
-          <div style={styles.section}>
-            <SectionTitle>Banking Details</SectionTitle>
-            <div style={styles.grid}>
-              <Field label="Account Holder Name" value={banking.account_holder_name} />
-              <Field label="Bank Name" value={banking.bank_name} />
-              <Field label="Branch Name" value={banking.branch_name} />
-              <Field label="Account Number" value={banking.account_number} />
-              <Field label="IFSC" value={banking.ifsc} />
-              <Field label="Pan Card Number" value={banking.pan_card_number} />
-              <Field label="Aadhar Card Number" value={banking.aadhar_card_number} />
-            </div>
-            <div style={{ ...styles.grid, marginTop: "14px" }}>
-              <LinkField label="Pan Card" href={banking.pan_card} linkText="View Pan Card" />
-              <LinkField label="Aadhar Card" href={banking.aadhar_card} linkText="View Aadhar Card" />
-              <LinkField label="Cancelled cheque/Bank details" href={banking.cheque} linkText="View Cancelled cheque/Bank details" />
-            </div>
-          </div>
+<div style={styles.section}>
+  <SectionTitle>Banking Details</SectionTitle>
 
-          {/* ── Reporting Area Details ── */}
-          <div style={styles.section}>
-            <SectionTitle>Reporting Area Details</SectionTitle>
-            <div style={styles.grid}>
-              <BoolField label="Xray" value={reporting.xray} />
-              <BoolField label="Others" value={reporting.others} />
-            </div>
+  <div style={styles.grid}>
+    <Field
+      label="Account Holder Name"
+      value={banking.account_holder_name}
+    />
 
-            {Array.isArray(reporting.mri_options) && reporting.mri_options.length > 0 && (
-              <div style={{ marginTop: "16px" }}>
-                <span style={styles.label}>MRI Options</span>
-                <div style={styles.tagGroup}>
-                  {reporting.mri_options.map((opt, i) => <span key={i} style={styles.tagAccent}>{opt}</span>)}
-                </div>
-              </div>
-            )}
-            <div style={{ marginTop: "12px" }}>
-              <Field label="MRI Others" value={reporting.mri_others} />
-            </div>
+    <Field
+      label="Bank Name"
+      value={banking.bank_name}
+    />
 
-            {Array.isArray(reporting.ct_options) && reporting.ct_options.length > 0 && (
-              <div style={{ marginTop: "16px" }}>
-                <span style={styles.label}>CT Options</span>
-                <div style={styles.tagGroup}>
-                  {reporting.ct_options.map((opt, i) => <span key={i} style={styles.tag}>{opt}</span>)}
-                </div>
-              </div>
-            )}
-            <div style={{ marginTop: "12px" }}>
-              <Field label="CT Others" value={reporting.ct_others} />
-            </div>
+    <Field
+      label="Branch Name"
+      value={banking.branch_name}
+    />
 
-            <div style={{ marginTop: "12px" }}>
-              <Field label="Others Text" value={reporting.others_description} />
-            </div>
-          </div>
+    <Field
+      label="Account Number"
+      value={banking.account_number}
+    />
 
+    <Field
+      label="IFSC"
+      value={banking.ifsc}
+    />
+
+    <Field
+      label="Pan Card Number"
+      value={banking.pan_card_number}
+    />
+
+    <Field
+      label="Aadhar Card Number"
+      value={banking.aadhar_card_number}
+    />
+
+    {/* NEW FIELDS */}
+
+    <Field
+      label="Indemnity Insurance Name"
+      value={banking.indemnity_insurance_name}
+    />
+
+    <Field
+      label="Coverage Amount"
+      value={
+        banking.indemnity_coverage
+          ? `₹ ${banking.indemnity_coverage}`
+          : ""
+      }
+    />
+  </div>
+
+  <div
+    style={{
+      ...styles.grid,
+      marginTop: "14px",
+    }}
+  >
+    <LinkField
+      label="Pan Card"
+      href={banking.pan_card}
+      linkText="View Pan Card"
+    />
+
+    <LinkField
+      label="Aadhar Card"
+      href={banking.aadhar_card}
+      linkText="View Aadhar Card"
+    />
+
+    <LinkField
+      label="Cheque"
+      href={banking.cheque}
+      linkText="View Cheque"
+    />
+
+    {/* NEW FILE */}
+
+    <LinkField
+      label="Insurance Document"
+      href={banking.indemnity_file}
+      linkText="View Insurance File"
+    />
+  </div>
+</div>
+
+{/* ── Reporting Area Details ── */}
+<div style={styles.section}>
+  <SectionTitle>Reporting Area Details</SectionTitle>
+
+  <div style={styles.grid}>
+    <BoolField
+      label="Xray"
+      value={reporting.xray}
+    />
+
+    <BoolField
+      label="Others"
+      value={reporting.others}
+    />
+  </div>
+
+  {/* MRI */}
+
+  <div style={{ marginTop: "16px" }}>
+    <span style={styles.label}>
+      MRI Options
+    </span>
+
+    <div style={styles.tagGroup}>
+      {Array.isArray(reporting.mri_options) &&
+      reporting.mri_options.length > 0 ? (
+        reporting.mri_options.map((opt, i) => (
+          <span
+            key={i}
+            style={styles.tagAccent}
+          >
+            {opt}
+          </span>
+        ))
+      ) : (
+        <span style={styles.emptyState}>—</span>
+      )}
+    </div>
+  </div>
+
+  <div style={{ marginTop: "12px" }}>
+    <Field
+      label="MRI Others"
+      value={reporting.mri_others}
+    />
+  </div>
+
+  {/* CT */}
+
+  <div style={{ marginTop: "16px" }}>
+    <span style={styles.label}>
+      CT Options
+    </span>
+
+    <div style={styles.tagGroup}>
+      {Array.isArray(reporting.ct_options) &&
+      reporting.ct_options.length > 0 ? (
+        reporting.ct_options.map((opt, i) => (
+          <span key={i} style={styles.tag}>
+            {opt}
+          </span>
+        ))
+      ) : (
+        <span style={styles.emptyState}>—</span>
+      )}
+    </div>
+  </div>
+
+  <div style={{ marginTop: "12px" }}>
+    <Field
+      label="CT Others"
+      value={reporting.ct_others}
+    />
+  </div>
+
+  {/* NEW SUBSPECIALITY */}
+
+  <div style={{ marginTop: "16px" }}>
+    <span style={styles.label}>
+      Subspeciality
+    </span>
+
+    <div style={styles.tagGroup}>
+      {Array.isArray(reporting.subspeciality) &&
+      reporting.subspeciality.length > 0 ? (
+        reporting.subspeciality.map((opt, i) => (
+          <span
+            key={i}
+            style={styles.tagAccent}
+          >
+            {opt}
+          </span>
+        ))
+      ) : (
+        <span style={styles.emptyState}>—</span>
+      )}
+    </div>
+  </div>
+
+  <div style={{ marginTop: "12px" }}>
+    <Field
+      label="Others Text"
+      value={reporting.others_description}
+    />
+  </div>
+</div>
           {/* ── Availability Details ── */}
           <div style={styles.sectionLast}>
             <SectionTitle>Availability Details</SectionTitle>
