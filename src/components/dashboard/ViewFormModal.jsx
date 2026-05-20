@@ -577,7 +577,7 @@ export default function ViewFormModal({ user, closeModal }) {
     <Field
       label="Coverage Amount"
       value={
-        banking.indemnity_coverage
+        indemnity.indemnity_coverage
           ? `₹ ${indemnity.indemnity_coverage}`
           : ""
       }
