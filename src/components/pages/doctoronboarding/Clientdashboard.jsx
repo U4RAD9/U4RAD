@@ -708,29 +708,37 @@ export default function ClientDashboard() {
       });
   }
 
-function triggerMessage(client, type) {
-  fetch(`${BASE_URL}/send-message/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include", // keep session if needed
-    body: JSON.stringify({
-      email: client.email,
-      phone: client.phone,
-      name: client.contact_person,
-      type: type, // "email" or "whatsapp"
-    }),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      alert(`${type} sent successfully`);
+  function triggerMessage(client, type) {
+
+    const token = localStorage.getItem("token");
+
+    fetch(`${BASE_URL}/send-message/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+
+      body: JSON.stringify({
+        client_id: client.id,
+      }),
     })
-    .catch((err) => {
-      console.error(err);
-      alert(`Failed to send ${type}`);
-    });
-}
+      .then((res) => res.json())
+      .then((data) => {
+
+        console.log(data);
+
+        if (data.success) {
+          alert("SMS sent successfully");
+        } else {
+          alert(data.message || "SMS failed");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Failed to send SMS");
+      });
+  }
 
   function searchClient(value) {
     setSearch(value);
