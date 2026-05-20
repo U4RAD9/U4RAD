@@ -302,6 +302,7 @@ export default function ViewFormModal({ user, closeModal }) {
   const reporting = data?.reporting_area || {};
   const avail = data?.availability || {};
   const banking = data?.banking_details || {};
+  const indemnity = data?.indemnity_insurance || {};
   const experiences = Array.isArray(data?.experience_details) ? data.experience_details : [];
   const achievements = Array.isArray(data?.achievement_details) ? data.achievement_details : [];
 
@@ -570,14 +571,14 @@ export default function ViewFormModal({ user, closeModal }) {
 
     <Field
       label="Indemnity Insurance Name"
-      value={banking.indemnity_insurance_name}
+      value={indemnity.indemnity_insurance_name}
     />
 
     <Field
       label="Coverage Amount"
       value={
         banking.indemnity_coverage
-          ? `₹ ${banking.indemnity_coverage}`
+          ? `₹ ${indemnity.indemnity_coverage}`
           : ""
       }
     />
@@ -611,7 +612,7 @@ export default function ViewFormModal({ user, closeModal }) {
 
     <LinkField
       label="Insurance Document"
-      href={banking.indemnity_file}
+      href={indemnity.indemnity_file}
       linkText="View Insurance File"
     />
   </div>
