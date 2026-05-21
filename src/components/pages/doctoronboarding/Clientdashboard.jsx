@@ -735,7 +735,11 @@ export default function ClientDashboard() {
 
   function triggerMessage(client) {
 
-    const csrftoken = getCookie("csrftoken");
+    const csrftoken =
+      document.cookie
+        .split("; ")
+        .find(row => row.startsWith("csrftoken="))
+        ?.split("=")[1];
 
     fetch(`${BASE_URL}/send-message/`, {
 
