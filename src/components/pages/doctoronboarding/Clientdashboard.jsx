@@ -708,34 +708,66 @@ export default function ClientDashboard() {
       });
   }
 
-  function triggerMessage(client, type) {
+  function getCookie(name) {
+    let cookieValue = null;
 
-    const token = localStorage.getItem("token");
+    if (document.cookie && document.cookie !== "") {
+
+      const cookies = document.cookie.split(";");
+
+      for (let i = 0; i < cookies.length; i++) {
+
+        const cookie = cookies[i].trim();
+
+        if (cookie.substring(0, name.length + 1) === (name + "=")) {
+
+          cookieValue = decodeURIComponent(
+            cookie.substring(name.length + 1)
+          );
+
+          break;
+        }
+      }
+    }
+
+    return cookieValue;
+  }
+
+  function triggerMessage(client) {
+
+    const csrftoken = getCookie("csrftoken");
 
     fetch(`${BASE_URL}/send-message/`, {
+
       method: "POST",
+
+      credentials: "include",
+
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
+        "X-CSRFToken": csrftoken,
       },
 
       body: JSON.stringify({
         client_id: client.id,
       }),
     })
-      .then((res) => res.json())
-      .then((data) => {
+      .then(async (res) => {
+
+        const data = await res.json();
 
         console.log(data);
 
-        if (data.success) {
+        if (res.ok) {
           alert("SMS sent successfully");
         } else {
-          alert(data.message || "SMS failed");
+          alert(data.detail || data.message || "SMS failed");
         }
       })
       .catch((err) => {
+
         console.error(err);
+
         alert("Failed to send SMS");
       });
   }
