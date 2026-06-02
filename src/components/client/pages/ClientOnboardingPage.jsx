@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import ClientOnboarding from "../components/ClientOnboarding";
-import Navbar from "D:/U4RAD/src/components/Navbar.jsx"; // Ensure this points to your actual Navbar file!
+import Navbar from "../../Navbar"; // Ensure this points to your actual Navbar file!
 
 export default function ClientOnboardingPage() {
   const navigate = useNavigate();
