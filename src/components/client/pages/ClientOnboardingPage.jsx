@@ -1,14 +1,55 @@
+// // import React from "react";
+// // import { useNavigate } from "react-router-dom";
+// // import ClientOnboarding from "../components/ClientOnboarding";
+
+// // export default function ClientOnboardingPage() {
+// //   const navigate = useNavigate();
+// //   return (
+// //     <ClientOnboarding
+// //       asPage
+// //       onClose={() => navigate("/onboarding")}
+// //       onSuccess={() => navigate("/onboarding")}
+// //     />
+// //   );
+// // }
+
+
+
+
+
+// import React from "react";
+// import { useNavigate } from "react-router-dom";
+// import ClientOnboarding from "../components/ClientOnboarding";
+
+// export default function ClientOnboardingPage() {
+//   const navigate = useNavigate();
+//   return (
+//     <ClientOnboarding
+//       asPage
+//       onClose={() => navigate("/")}
+//       onSuccess={() => navigate("/")}
+//     />
+//   );
+// }
+
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import ClientOnboarding from "../components/ClientOnboarding";
+import Navbar from "D:/U4RAD/src/components/Navbar.jsx"; // Ensure this points to your actual Navbar file!
 
 export default function ClientOnboardingPage() {
   const navigate = useNavigate();
+  
   return (
-    <ClientOnboarding
-      asPage
-      onClose={() => navigate("/onboarding")}
-      onSuccess={() => navigate("/onboarding")}
-    />
+    <div style={{ backgroundColor: "#f8f9fa", minHeight: "100vh" }}>
+      {/* Adding the Navbar makes it feel like you are still on the Home Page */}
+      <Navbar />
+      
+      <ClientOnboarding
+        asPage
+        onClose={() => navigate("/")}
+      />
+    </div>
   );
 }

@@ -11,7 +11,7 @@ export default function Career() {
 
       <div className="onboarding-box">
 
-        <div className="onboarding-logo">U4RAD</div>
+        <div className="onboarding-logo"></div>
 
         <h1 className="onboarding-title">
           Welcome to U4RAD

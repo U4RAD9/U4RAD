@@ -155,6 +155,30 @@ function updateStage2(user,value) {
     })
 }
 
+function updateInstitution(user, value){
+
+    fetch(
+        `${BASE_URL}/update-institution/${user.id}/`,
+        {
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            credentials:"include",
+
+            body:JSON.stringify({
+                institution:value
+            })
+        }
+    )
+    .then(res=>res.json())
+    .then(()=>{
+        refreshTable();
+    })
+}
+
 /* =========================
    SEND MAIL (ADDED)
 ========================= */
@@ -287,6 +311,7 @@ onChange={(e)=>searchUser(e.target.value)}
 <th>Form Details</th>
 <th>Rate List Details</th>
 <th>Rate List Status</th>
+<th>Institution</th>
 <th>Stage 1 Status</th>
 <th>Stage 2 Status</th>
 <th>Send Mail</th>
@@ -317,6 +342,39 @@ Rate List Details
 </td>
 
 <td>{user.rateListStatus}</td>
+
+<td>
+
+<select
+    value={user.institution || ""}
+    onChange={(e)=>
+        updateInstitution(user, e.target.value)
+    }
+>
+
+    <option value="">
+        Select Institution
+    </option>
+
+    <option value="AIIMS">
+        AIIMS
+    </option>
+
+    <option value="PGI">
+        PGI
+    </option>
+
+    <option value="Premium Institution">
+        Premium Institution
+    </option>
+
+    <option value="Other Institution">
+        Other Institution
+    </option>
+
+</select>
+
+</td>
 
 <td>
     <div style={{display:"flex", flexDirection:"column", gap:"5px"}}>

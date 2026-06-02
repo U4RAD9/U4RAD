@@ -138,6 +138,8 @@ import ClientDashboard from './components/pages/doctoronboarding/Clientdashboard
 import ContactDashboard from './components/pages/doctoronboarding/ContactDashboard.jsx';
 import Career from './components/pages/doctoronboarding/career.jsx';
 
+import ClientRateAgreementPage from './components/client/components/ClientRateAgreement.jsx';
+
 function Layout() {
 
   const location = useLocation();
@@ -166,7 +168,7 @@ function Layout() {
         <Route path="/awards" element={<><Awards /><Newsletter /></>} />
 
         {/* ---------- ONBOARDING ---------- */}
-        <Route path="/onboarding" element={<Onboarding />} />
+        {/* <Route path="/onboarding" element={<Onboarding />} /> */}
         <Route path="/career" element={<Career />} />
         <Route path="/onboarding/radiologist" element={<DoctorOnboardingForm />} />
         <Route path="/onboarding/client" element={<ClientOnboardingPage />} />  {/* ← NEW */}
@@ -186,6 +188,7 @@ function Layout() {
 
         <Route path="/client-dashboard" element={<ClientDashboard />} />  {/* ← NEW */}
         <Route path="/contact-dashboard" element={<ContactDashboard />} />  {/* ← NEW */}
+        <Route path="/client-rate-agreement" element={<ClientRateAgreementPage />} />  {/* ← NEW */}
 
 
       </Routes>
