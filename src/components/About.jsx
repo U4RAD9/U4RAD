@@ -102,9 +102,12 @@ const About = () => {
             {/* Team Card 1 */}
             <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
               <img
-                src='https://www.xraidigital.com/Content/images/team/Ruchi_mam.jpg'
-                alt='Dr Ruchi Jangra'
-                className='w-32 h-32 mx-auto rounded-full mb-4'
+                src="https://xraidigital.com/Content/images/team/Ruchi_mam.jpg"
+                alt="Dr Ruchi Jangra"
+                className="w-32 h-32 mx-auto rounded-full mb-4 object-cover"
+                onError={(e) => {
+                  console.log("Image failed");
+                }}
               />
               <h4 className='text-2xl font-bold'>Dr Ruchi Jangra</h4>
               <p className='text-gray-600'>Manager - Business Operations and Founder’s office representative</p>
