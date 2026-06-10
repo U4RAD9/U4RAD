@@ -12,6 +12,66 @@ const MODALITIES = [
   { id: "MAMMO", label: "Mammography",  icon: "🩺" },
 ];
 
+// ADD THIS NEW STYLE OBJECT HERE
+const successStyles = {
+  container: {
+    textAlign: "center",
+    padding: "20px 24px 10px",
+  },
+  iconWrapper: {
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: "24px",
+  },
+  icon: {
+    width: "60px",
+    height: "60px",
+    color: "#16a34a", // Professional green
+  },
+  heading: {
+    fontSize: "26px",
+    fontWeight: "600",
+    color: "#111827",
+    marginBottom: "12px",
+    letterSpacing: "-0.5px",
+  },
+  primaryText: {
+    fontSize: "16px",
+    color: "#4b5563",
+    lineHeight: "1.6",
+    marginBottom: "20px",
+  },
+  divider: {
+    height: "1px",
+    backgroundColor: "#e5e7eb",
+    margin: "24px auto",
+    width: "80%",
+  },
+  secondaryText: {
+    fontSize: "14px",
+    color: "#6b7280",
+    lineHeight: "1.6",
+    marginBottom: "30px",
+  },
+  contactNumber: {
+    color: "#111827",
+    fontWeight: "600",
+  },
+  button: {
+    backgroundColor: "#2563eb",
+    color: "#ffffff",
+    border: "none",
+    borderRadius: "6px",
+    padding: "12px 32px",
+    fontSize: "15px",
+    fontWeight: "500",
+    cursor: "pointer",
+    transition: "background-color 0.2s ease",
+    width: "100%",
+    maxWidth: "250px"
+  },
+};
+
 const InputField = ({
   label, name, type = "text", value, onChange,
   error, placeholder, required, maxLength, prefix, hint,
@@ -442,8 +502,7 @@ const ClientOnboarding = ({ onClose, onSuccess, asPage = false }) => {
         <Terms onClose={() => setShowTermsModal(false)} />
       )}
 
-      {/* ── SUCCESS POPUP MODAL (Floats over the form!) ── */}
-      {submitted && (
+{submitted && (
         <div 
           className="co-overlay" 
           onClick={onClose} 
@@ -456,7 +515,7 @@ const ClientOnboarding = ({ onClose, onSuccess, asPage = false }) => {
           <div 
             className="co-modal" 
             onClick={(e) => e.stopPropagation()} 
-            style={{ maxWidth: "500px", width: "90%", paddingBottom: "30px", margin: 0 }}
+            style={{ maxWidth: "480px", width: "90%", paddingBottom: "30px", margin: 0, borderRadius: "12px" }}
           >
             {/* Header just for the cross button */}
             <div className="co-header" style={{ borderBottom: "none", paddingBottom: 0 }}>
@@ -464,24 +523,35 @@ const ClientOnboarding = ({ onClose, onSuccess, asPage = false }) => {
               <button className="co-close" onClick={onClose} aria-label="Close">✕</button>
             </div>
 
-            {/* Centered Success Content */}
-            <div className="co-success-screen" style={{ textAlign: "center", padding: "0 20px" }}>
-              <div className="co-success-icon" style={{ fontSize: "50px", marginBottom: "15px" }}>🎉</div>
-              <h2 style={{ fontSize: "24px", marginBottom: "10px" }}>Thank You!</h2>
-              <p style={{ fontSize: "16px", color: "#333", lineHeight: "1.5" }}>
-                Your registration for <strong>{form.clientName}</strong> has been
-                submitted successfully.
+            {/* Redesigned Centered Success Content */}
+            <div className="co-success-screen" style={successStyles.container}>
+              <div style={successStyles.iconWrapper}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={successStyles.icon}>
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+
+              <h2 style={successStyles.heading}>
+                Thank You, {form.clientName}!
+              </h2>
+              
+              <p style={successStyles.primaryText}>
+                Your registration has been successfully submitted.
               </p>
-              <p className="co-success-email" style={{ marginTop: "15px", fontSize: "14px", color: "#666", lineHeight: "1.5" }}>
-                Our team will call you shortly to proceed further, or you can reach out to us directly at{" "}
-                <strong>+91 85********</strong>
+
+              <div style={successStyles.divider}></div>
+
+              <p className="co-success-email" style={successStyles.secondaryText}>
+                One of our representatives will contact you shortly to discuss the next steps. For immediate assistance, please reach out to us at <strong style={successStyles.contactNumber}>+91 8587075085</strong>.
               </p>
+
               <button 
                 className="co-btn co-btn--primary" 
                 onClick={onClose} 
-                style={{ marginTop: "25px", padding: "10px 30px" }}
+                style={successStyles.button}
               >
-                Go to Home
+                Return to Home
               </button>
             </div>
           </div>

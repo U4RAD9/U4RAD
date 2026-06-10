@@ -51,7 +51,13 @@ export default function ClientDashboard() {
   // --- RATE LIST STATES ---
   const [rateModalClient, setRateModalClient] = useState(null);
   const [rateList, setRateList] = useState([]); 
+  const [isSavingRates, setIsSavingRates] = useState(false);
   const [isSendingRates, setIsSendingRates] = useState(false);
+
+  // --- CALLBACK LIST STATES ---
+  const [callbacks, setCallbacks] = useState([]);
+  const [showCallbacksModal, setShowCallbacksModal] = useState(false);
+  const [isLoadingCallbacks, setIsLoadingCallbacks] = useState(false);
 
   const navigate = useNavigate();
 
@@ -87,6 +93,26 @@ export default function ClientDashboard() {
         console.error("Fetch failed:", err);
         setClients([]);
         setAllClients([]);
+      });
+  }
+
+  // --- FETCH CALLBACKS ---
+  function fetchCallbacks() {
+    setIsLoadingCallbacks(true);
+    fetch(`${BASE_URL}/callback-request/list/`, { credentials: "include" })
+      .then(async (res) => {
+        if (!res.ok) throw new Error("Failed to fetch callbacks");
+        return res.json();
+      })
+      .then((data) => {
+        setCallbacks(data || []);
+      })
+      .catch((err) => {
+        console.error("Fetch failed:", err);
+        alert("Failed to load callback requests.");
+      })
+      .finally(() => {
+        setIsLoadingCallbacks(false);
       });
   }
 
@@ -127,27 +153,53 @@ export default function ClientDashboard() {
     }
   }
 
-  // ✅ Updated to handle changes to modality, caseType, OR rate
   function handleRateChange(index, field, newValue) {
     const updatedRates = [...rateList];
     updatedRates[index][field] = newValue;
     setRateList(updatedRates);
   }
 
-  // ✅ New function to ADD a row
   function handleAddRateRow() {
     const newId = rateList.length > 0 ? Math.max(...rateList.map(r => r.id || 0)) + 1 : 1;
     const newRow = { id: newId, modality: "", caseType: "", rate: "" };
     setRateList([...rateList, newRow]);
   }
 
-  // ✅ New function to REMOVE a row
   function handleRemoveRateRow(index) {
     const updatedRates = rateList.filter((_, i) => i !== index);
     setRateList(updatedRates);
   }
 
-  function saveAndSendRates() {
+  function saveRates() {
+    setIsSavingRates(true);
+
+    fetch(`${BASE_URL}/client/rates/save/`, { 
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        client_id: rateModalClient.id,
+        rate_list: JSON.stringify(rateList)
+      }),
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        if (res.ok) {
+          alert("Rate list saved successfully!");
+          refreshTable();
+        } else {
+          alert(data.error || "Failed to save rates.");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Network error while saving rates.");
+      })
+      .finally(() => {
+        setIsSavingRates(false);
+      });
+  }
+
+  function sendAgreementEmail() {
     setIsSendingRates(true);
 
     fetch(`${BASE_URL}/client/rates/send-agreement/`, {
@@ -161,7 +213,7 @@ export default function ClientDashboard() {
       .then(async (res) => {
         const data = await res.json();
         if (res.ok) {
-          alert("Rate list saved and agreement link sent to the client!");
+          alert("Agreement link sent to the client!");
           setRateModalClient(null);
           refreshTable();
         } else {
@@ -350,11 +402,18 @@ export default function ClientDashboard() {
     .cd-rate-note { font-size: 13px; font-weight: 700; text-align: center; margin-top: 20px; color: ${t.textPrimary}; }
 
     .cd-modal-footer { padding: 14px 24px; border-top: 1px solid ${t.borderMain}; display: flex; justify-content: flex-end; gap: 10px; position: sticky; bottom: 0; background: ${t.cardBg}; z-index: 5; }
-    .cd-modal-close-btn { padding: 8px 20px; background: #6b7280; border: none; color: white; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: 'DM Sans', sans-serif; }
+    
+    /* SEPARATED BUTTON STYLES */
+    .cd-modal-close-btn { padding: 8px 18px; background: #6b7280; border: none; color: white; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
     .cd-modal-close-btn:hover { background: #4b5563; }
-    .cd-modal-save-btn { padding: 8px 20px; background: #3b82f6; border: none; color: #fff; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: 'DM Sans', sans-serif; }
+    
+    .cd-modal-save-btn { padding: 8px 18px; background: #3b82f6; border: none; color: #fff; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
     .cd-modal-save-btn:hover { background: #2563eb; }
     .cd-modal-save-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .cd-modal-email-btn { padding: 8px 18px; background: #10b981; border: none; color: #fff; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+    .cd-modal-email-btn:hover { background: #059669; }
+    .cd-modal-email-btn:disabled { opacity: 0.6; cursor: not-allowed; }
   `;
 
   return (
@@ -379,6 +438,19 @@ export default function ClientDashboard() {
         {/* ── Controls ── */}
         <div className="cd-controls">
           <button className="cd-refresh-btn" onClick={refreshTable}>↻ Refresh</button>
+
+          {/* 👇 NEW BUTTON TO OPEN CALLBACK MODAL 👇 */}
+          <button 
+            className="cd-refresh-btn" 
+            style={{ backgroundColor: "rgba(220,38,38,0.1)", borderColor: "rgba(220,38,38,0.3)" }}
+            onClick={() => {
+              setShowCallbacksModal(true);
+              fetchCallbacks();
+            }}
+          >
+            📞 View Callback Requests
+          </button>
+
           <input
             className="cd-search"
             placeholder="Search by name, contact person or email…"
@@ -457,7 +529,6 @@ export default function ClientDashboard() {
                         </button>
                       </td>
 
-
                       <td>
                         <button className="cd-view-btn" onClick={() => setSelected(client)}>
                           👁 View Details
@@ -487,7 +558,7 @@ export default function ClientDashboard() {
           </table>
         </div>
 
-        {/* ── Rate Editor Modal (TABULAR LAYOUT WITH ADD/DELETE) ── */}
+        {/* ── Rate Editor Modal ── */}
         {rateModalClient && (
           <div className="cd-modal-overlay" onClick={() => setRateModalClient(null)}>
             <div className="cd-modal cd-modal-wide" onClick={(e) => e.stopPropagation()}>
@@ -510,13 +581,12 @@ export default function ClientDashboard() {
                       <th style={{width: "20%"}}>Modality</th>
                       <th style={{width: "45%"}}>Case Type</th>
                       <th style={{width: "15%"}}>Doctor Rate</th>
-                      <th style={{width: "5%"}}></th> {/* Column for delete button */}
+                      <th style={{width: "5%"}}></th>
                     </tr>
                   </thead>
                   <tbody>
                     {rateList.map((row, index) => (
                       <tr key={index}>
-                        {/* We use index + 1 so the list is always 1, 2, 3 even if a row is deleted */}
                         <td>{index + 1}.</td>
                         <td>
                           <input 
@@ -569,19 +639,28 @@ export default function ClientDashboard() {
 
               <div className="cd-modal-footer">
                 <button className="cd-modal-close-btn" onClick={() => setRateModalClient(null)}>Close</button>
-                <button 
-                  className="cd-modal-save-btn" 
-                  onClick={saveAndSendRates}
-                  disabled={isSendingRates}
-                >
-                  {isSendingRates ? "Saving..." : "Save Changes and Send Email"}
-                </button>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <button 
+                    className="cd-modal-save-btn" 
+                    onClick={saveRates}
+                    disabled={isSavingRates || isSendingRates}
+                  >
+                    {isSavingRates ? "Saving..." : "Save Rates"}
+                  </button>
+                  <button 
+                    className="cd-modal-email-btn" 
+                    onClick={sendAgreementEmail}
+                    disabled={isSendingRates || isSavingRates}
+                  >
+                    {isSendingRates ? "Sending..." : "Send Email"}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         )}
 
-        {/* ── View Details Modal (UNCHANGED, KEEPS PAN INFO) ── */}
+        {/* ── View Details Modal ── */}
         {selected && (() => {
           const modalities = Array.isArray(selected.modalities)
             ? selected.modalities.map((m) => MODALITY_LABELS[m] || m)
@@ -665,6 +744,65 @@ export default function ClientDashboard() {
             </div>
           );
         })()}
+
+        {/* 👇 NEW: CALLBACK REQUESTS MODAL 👇 */}
+        {showCallbacksModal && (
+          <div className="cd-modal-overlay" onClick={() => setShowCallbacksModal(false)}>
+            <div className="cd-modal cd-modal-wide" onClick={(e) => e.stopPropagation()}>
+              <div className="cd-modal-header">
+                <div className="cd-modal-header-left">
+                  <div className="cd-modal-avatar" style={{backgroundColor: "rgba(220,38,38,0.1)", border: "1px solid rgba(220,38,38,0.2)"}}>📞</div>
+                  <div>
+                    <div className="cd-modal-title">Callback Requests</div>
+                    <div className="cd-modal-subtitle">Clients who requested to be contacted</div>
+                  </div>
+                </div>
+                <button className="cd-modal-close" onClick={() => setShowCallbacksModal(false)}>✕</button>
+              </div>
+
+              <div className="cd-modal-body">
+                {isLoadingCallbacks ? (
+                  <div className="cd-empty">Loading requests...</div>
+                ) : (
+                  <table className="cd-rate-table">
+                    <thead>
+                      <tr>
+                        <th style={{width: "20%"}}>Date</th>
+                        <th style={{width: "25%"}}>Hospital Name</th>
+                        <th style={{width: "20%"}}>Contact Person</th>
+                        <th style={{width: "15%"}}>Phone</th>
+                        <th style={{width: "20%"}}>Message</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {callbacks.length === 0 ? (
+                        <tr>
+                          <td colSpan={5} className="cd-empty">No callback requests found.</td>
+                        </tr>
+                      ) : (
+                        callbacks.map((cb) => (
+                          <tr key={cb.id}>
+                            <td style={{ fontSize: "12px", color: t.textSecondary }}>{cb.date}</td>
+                            <td style={{ fontWeight: "600", color: t.textPrimary }}>{cb.hospital_name}</td>
+                            <td>{cb.contact_person}</td>
+                            <td className="cd-mono-cell">{cb.phone}</td>
+                            <td style={{ fontSize: "12px", color: t.textSecondary, textAlign: "left" }}>
+                              {cb.message || <span style={{opacity: 0.5}}>No message</span>}
+                            </td>
+                          </tr>
+                        ))
+                      )}
+                    </tbody>
+                  </table>
+                )}
+              </div>
+
+              <div className="cd-modal-footer">
+                <button className="cd-modal-close-btn" onClick={() => setShowCallbacksModal(false)}>Close</button>
+              </div>
+            </div>
+          </div>
+        )}
 
       </div>
     </>

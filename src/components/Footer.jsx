@@ -299,7 +299,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {" "}XRAi Digital Diagnostics
+                  {" "}XRAi digital Diagnostics
                 </a>
               </strong>
             </div>
