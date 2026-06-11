@@ -635,6 +635,32 @@ export default function ClientRateAgreement() {
   const [cbMessage, setCbMessage] = useState("");
   const [isSubmittingCb, setIsSubmittingCb] = useState(false);
 
+  // // Fetch the rate list using the token when the page loads
+  // useEffect(() => {
+  //   if (!token) {
+  //     setError("Invalid or missing agreement token.");
+  //     setLoading(false);
+  //     return;
+  //   }
+
+  //   fetch(`${BASE_URL}/client/rates/view/?token=${token}`)
+  //     .then(async (res) => {
+  //       const data = await res.json();
+  //       if (!res.ok) throw new Error(data.error || "Failed to load rate list.");
+        
+  //       const parsedRates = typeof data.rate_list === 'string' 
+  //         ? JSON.parse(data.rate_list) 
+  //         : data.rate_list;
+
+  //       setClientData({ ...data, rate_list: parsedRates });
+  //       setLoading(false);
+  //     })
+  //     .catch((err) => {
+  //       setError(err.message);
+  //       setLoading(false);
+  //     });
+  // }, [token]);
+
   // Fetch the rate list using the token when the page loads
   useEffect(() => {
     if (!token) {
@@ -653,6 +679,12 @@ export default function ClientRateAgreement() {
           : data.rate_list;
 
         setClientData({ ...data, rate_list: parsedRates });
+        
+        // ADDED THIS BLOCK: Set the phone number if it comes from the API
+        if (data.phone) {
+          setPhone(data.phone);
+        }
+
         setLoading(false);
       })
       .catch((err) => {
