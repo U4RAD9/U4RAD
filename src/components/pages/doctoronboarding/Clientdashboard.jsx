@@ -213,7 +213,7 @@ export default function ClientDashboard() {
       .then(async (res) => {
         const data = await res.json();
         if (res.ok) {
-          alert("Agreement link sent to the client!");
+          alert("Rate list email sent to the client!");
           setRateModalClient(null);
           refreshTable();
         } else {
@@ -426,7 +426,7 @@ export default function ClientDashboard() {
           <div className="cd-header-left">
             <button className="cd-back-btn" onClick={goBack}>← Back</button>
             <div className="cd-title-bar" />
-            <h1 className="cd-title">Client <span>Dashboard</span></h1>
+            <h1 className="cd-title">Client Onboarding Dashboard</h1>
           </div>
           <div className="cd-header-right">
             <button className="cd-theme-btn" onClick={() => setDarkMode(!darkMode)}>
@@ -525,7 +525,7 @@ export default function ClientDashboard() {
                           }} 
                           onClick={() => openRateModal(client)}
                         >
-                          {client.rates_agreed ? "✅ Rates Agreed" : "💰 Manage Rates"}
+                          {client.rates_agreed ? "✅ Rates Agreed" : "💰 Share Rates"}
                         </button>
                       </td>
 

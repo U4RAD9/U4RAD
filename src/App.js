@@ -172,6 +172,7 @@ function Layout() {
         <Route path="/career" element={<Career />} />
         <Route path="/onboarding/radiologist" element={<DoctorOnboardingForm />} />
         <Route path="/onboarding/client" element={<ClientOnboardingPage />} />  {/* ← NEW */}
+        <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/onboarding/callback" element={<CallbackForm />} />
         <Route path="/rate-list/:id" element={<RateList />} />
 

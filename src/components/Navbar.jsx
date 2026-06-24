@@ -529,7 +529,7 @@ const Navbar = () => {
         {/* Client Registration Button */}
         <li className="mx-2 cursor-pointer flex items-center">
           <Link
-            to="/onboarding/client" 
+            to="/onboarding" 
             className="bg-[hsl(357,100%,59%)] text-white px-5 py-2 rounded-full font-bold hover:bg-red-700 transition duration-300 shadow-lg"
           >
             Client Registration

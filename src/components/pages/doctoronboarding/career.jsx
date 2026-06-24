@@ -24,7 +24,7 @@ export default function Career() {
 
           {/* CLIENT */}
 
-         <div
+         {/* <div
            className="role-card"
            onClick={() => window.open(
              "https://docs.google.com/forms/d/e/1FAIpQLScTov8gEW0wq0o8LJdR275fh2muiDkhnXfzkdey3Gj1VNp9Bw/viewform?usp=sf_link",
@@ -38,7 +38,7 @@ export default function Career() {
 
             <p>Join Us</p>
 
-          </div>
+          </div> */}
 
 
           {/* RADIOLOGIST */}

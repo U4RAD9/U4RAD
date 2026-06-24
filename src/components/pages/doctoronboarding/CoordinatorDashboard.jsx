@@ -227,7 +227,7 @@ return(
 <div className="navbar-right">
 
 <button className="dashboard-btn" onClick={()=>navigate("/client-dashboard")}>
-Client Dashboard
+Client Onboarding Dashboard
 </button>
 
 <button className="dashboard-btn" onClick={()=>navigate("/contact-dashboard")}>

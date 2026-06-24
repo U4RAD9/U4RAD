@@ -5,12 +5,20 @@ import "./ClientOnboarding.css";
 import Terms from "./Terms";
 
 const MODALITIES = [
-  { id: "XRAY",  label: "X-Ray",       icon: "🫁" },
-  { id: "CT",    label: "CT Scan",      icon: "🧠" },
-  { id: "MRI",   label: "MRI",          icon: "🔬" },
-  { id: "ECG",   label: "ECG",          icon: "💓" },
-  { id: "MAMMO", label: "Mammography",  icon: "🩺" },
+  { id: "XRAY",  label: "X-Ray" },
+  { id: "CT",    label: "CT Scan" },
+  { id: "MRI",   label: "MRI" },
+  { id: "ECG",   label: "ECG" },
+  { id: "MAMMO", label: "Mammography" },
 ];
+
+// const MODALITIES = [
+//   { id: "XRAY",  label: "X-Ray",       icon: "🫁" },
+//   { id: "CT",    label: "CT Scan",      icon: "🧠" },
+//   { id: "MRI",   label: "MRI",          icon: "🔬" },
+//   { id: "ECG",   label: "ECG",          icon: "💓" },
+//   { id: "MAMMO", label: "Mammography",  icon: "🩺" },
+// ];
 
 // ADD THIS NEW STYLE OBJECT HERE
 const successStyles = {
@@ -348,7 +356,7 @@ const ClientOnboarding = ({ onClose, onSuccess, asPage = false }) => {
           <div className="co-section">
             <h3 className="co-section-title">
               <span className="co-section-num">03</span>
-              Modalities Offered
+              Modalities
             </h3>
             <p className="co-section-desc">
               Select all imaging modalities available at your center
@@ -376,7 +384,7 @@ const ClientOnboarding = ({ onClose, onSuccess, asPage = false }) => {
           <div className="co-section">
             <h3 className="co-section-title">
               <span className="co-section-num">04</span>
-              KYC / Tax Details <span style={{ fontSize: "14px", color: "#666", fontWeight: "normal", marginLeft: "8px" }}>(Optional)</span>
+              PAN Details <span style={{ fontSize: "14px", color: "#666", fontWeight: "normal", marginLeft: "8px" }}></span>
             </h3>
             <div className="co-grid-2">
               <div className={`co-field ${errors.pan ? "co-field--error" : ""}`}>
@@ -489,7 +497,7 @@ const ClientOnboarding = ({ onClose, onSuccess, asPage = false }) => {
               >
                 {submitting
                   ? <span className="co-spinner">Submitting…</span>
-                  : "Submit Registration"}
+                  : "Submit"}
               </button>
             </div>
           </div>
@@ -537,13 +545,13 @@ const ClientOnboarding = ({ onClose, onSuccess, asPage = false }) => {
               </h2>
               
               <p style={successStyles.primaryText}>
-                Your registration has been successfully submitted.
+                Your information has been successfully submitted.
               </p>
 
               <div style={successStyles.divider}></div>
 
               <p className="co-success-email" style={successStyles.secondaryText}>
-                One of our representatives will contact you shortly to discuss the next steps. For immediate assistance, please reach out to us at <strong style={successStyles.contactNumber}>+91 8587075085</strong>.
+                We will connect with you shortly. Or you may call/whatsapp us at <strong style={successStyles.contactNumber}>+91 8587075085</strong>.
               </p>
 
               <button 

@@ -1,16 +1,19 @@
 // import React, { useEffect, useState } from "react";
-// import { useSearchParams } from "react-router-dom";
+// import { useSearchParams, useNavigate } from "react-router-dom";
 // import { BASE_URL } from "../../apiconnector";
 // import Logo from "../../../assets/Logo.png"; // Adjust the path as necessary
+
 
 // export default function ClientRateAgreement() {
 //   const [searchParams] = useSearchParams();
 //   const token = searchParams.get("token");
 
+//   const navigate = useNavigate();
+
 //   // States
 //   const [loading, setLoading] = useState(true);
 //   const [error, setError] = useState("");
-//   const [clientData, setClientData] = useState(null); // Will hold { client_name, rate_list: [...] }
+//   const [clientData, setClientData] = useState(null); 
   
 //   const [step, setStep] = useState(1); // 1: View Rates, 2: OTP Verification, 3: Success, 4: Callback Form
 //   const [phone, setPhone] = useState("");
@@ -20,12 +23,37 @@
 //   const [agreed, setAgreed] = useState(false);
 
 //   // Callback Form States
+//   const [cbHospitalName, setCbHospitalName] = useState("");
 //   const [cbName, setCbName] = useState("");
 //   const [cbPhone, setCbPhone] = useState("");
 //   const [cbMessage, setCbMessage] = useState("");
 //   const [isSubmittingCb, setIsSubmittingCb] = useState(false);
 
-//   const [cbHospitalName, setCbHospitalName] = useState("");
+//   // // Fetch the rate list using the token when the page loads
+//   // useEffect(() => {
+//   //   if (!token) {
+//   //     setError("Invalid or missing agreement token.");
+//   //     setLoading(false);
+//   //     return;
+//   //   }
+
+//   //   fetch(`${BASE_URL}/client/rates/view/?token=${token}`)
+//   //     .then(async (res) => {
+//   //       const data = await res.json();
+//   //       if (!res.ok) throw new Error(data.error || "Failed to load rate list.");
+        
+//   //       const parsedRates = typeof data.rate_list === 'string' 
+//   //         ? JSON.parse(data.rate_list) 
+//   //         : data.rate_list;
+
+//   //       setClientData({ ...data, rate_list: parsedRates });
+//   //       setLoading(false);
+//   //     })
+//   //     .catch((err) => {
+//   //       setError(err.message);
+//   //       setLoading(false);
+//   //     });
+//   // }, [token]);
 
 //   // Fetch the rate list using the token when the page loads
 //   useEffect(() => {
@@ -35,18 +63,22 @@
 //       return;
 //     }
 
-//     // Expected Backend API to fetch rates based on token
 //     fetch(`${BASE_URL}/client/rates/view/?token=${token}`)
 //       .then(async (res) => {
 //         const data = await res.json();
 //         if (!res.ok) throw new Error(data.error || "Failed to load rate list.");
         
-//         // Parse the rate list JSON string back into an array
 //         const parsedRates = typeof data.rate_list === 'string' 
 //           ? JSON.parse(data.rate_list) 
 //           : data.rate_list;
 
 //         setClientData({ ...data, rate_list: parsedRates });
+        
+//         // ADDED THIS BLOCK: Set the phone number if it comes from the API
+//         if (data.phone) {
+//           setPhone(data.phone);
+//         }
+
 //         setLoading(false);
 //       })
 //       .catch((err) => {
@@ -73,7 +105,7 @@
 //         const data = await res.json();
 //         if (res.ok) {
 //           alert("OTP sent to your phone.");
-//           setStep(2); // Move to OTP entry step
+//           setStep(2); 
 //         } else {
 //           alert(data.error || "Failed to send OTP.");
 //         }
@@ -99,7 +131,7 @@
 //       .then(async (res) => {
 //         const data = await res.json();
 //         if (res.ok) {
-//           setStep(3); // Move to Success Step
+//           setStep(3); 
 //         } else {
 //           alert(data.error || "Verification failed. Check OTP or Phone Number.");
 //         }
@@ -108,31 +140,56 @@
 //       .finally(() => setIsVerifying(false));
 //   };
 
-//   // Handle Callback Request Submission
-//   const handleCallbackSubmit = () => {
-//     if (!cbName || !cbPhone || cbPhone.length !== 10) {
-//       alert("Please enter your name and a valid 10-digit phone number.");
+//   // ✅ UPDATED: Handle Callback Request Submission to Backend
+//   const handleCallbackSubmit = async () => {
+//     if (!cbHospitalName.trim() || !cbName.trim() || !cbPhone.trim()) {
+//       alert("Please fill in the Hospital Name, Contact Person, and Phone Number.");
+//       return;
+//     }
+
+//     if (cbPhone.length !== 10) {
+//       alert("Please enter a valid 10-digit phone number.");
 //       return;
 //     }
 
 //     setIsSubmittingCb(true);
 
-//     // Replace with your actual callback API endpoint
-//     fetch(`${BASE_URL}/client/request-callback/`, {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({ token, name: cbName, phone: cbPhone, message: cbMessage }),
-//     })
-//       .then(async (res) => {
-//         // Assuming success for demonstration, adjust based on your backend response
-//         alert("Callback request submitted successfully. Our team will contact you soon.");
-//         setStep(1); // Return to main screen
+//     try {
+//       const response = await fetch(`${BASE_URL}/callback-request/submit/`, {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({
+//           hospital_name: cbHospitalName,
+//           contact_person: cbName,
+//           phone: cbPhone,
+//           message: cbMessage,
+//         }),
+//       });
+
+//       const data = await response.json();
+
+//       if (response.ok) {
+//         alert("Callback request submitted successfully! Our team will contact you soon.");
+//         // Clear the form fields
+//         setCbHospitalName("");
 //         setCbName("");
 //         setCbPhone("");
 //         setCbMessage("");
-//       })
-//       .catch(() => alert("Network error. Try again."))
-//       .finally(() => setIsSubmittingCb(false));
+
+//         navigate("/");
+//         // Return to main screen
+//         setStep(1); 
+//       } else {
+//         alert(data.error || "Failed to submit request. Please try again.");
+//       }
+//     } catch (error) {
+//       console.error("Callback submission error:", error);
+//       alert("A network error occurred. Please check your connection and try again.");
+//     } finally {
+//       setIsSubmittingCb(false);
+//     }
 //   };
 
 //   if (loading) {
@@ -186,15 +243,25 @@
 //       `}</style>
 
 //       <div className="cra-card">
-//         <div className="cra-header">
-//           <img src={Logo} alt="Logo" className="cra-logo" />
-//           <h1 className="cra-title">Greetings from U4RAD Technologies</h1>
-//           <div className="cra-greeting-text">
-//             Thank you for connecting with us.<br />
-//             Kindly check the rates below:
-//           </div>
-//           <p className="cra-subtitle">Quotation for: <strong>{clientData?.client_name}</strong></p>
-//         </div>
+//       <div className="cra-header">
+//         <img src={Logo} alt="Logo" className="cra-logo" />
+        
+//         {/* Top: Quotation Header */}
+//         <h1 className="cra-title">
+//           Quotation for: {clientData?.client_name}
+//         </h1>
+        
+//         <p style={{ marginTop: "1rem", marginBottom: "1rem", fontSize: "14px", fontWeight: "normal" }}>
+//           Greetings from U4RAD Technologies<br />
+//           Thank you for connecting with us.<br />
+//           Kindly check the rates below:
+//         </p>
+
+//         {/* Bottom: Information text with proper formatting */}
+//         <p className="cra-info-text" style={{ textAlign: "left", lineHeight: "1.5" }}>
+//           U4rad shares 2 types of rates - one to get the cases reported by an available doctor or a radiologist chosen by the client. It is a market-driven rate list (can be done via app) where radiologists are decided on the basis of experience, institutions, etc.
+//         </p>
+//       </div>
 
 //         {/* STEP 1: REVIEW RATES */}
 //         {step === 1 && (
@@ -236,13 +303,14 @@
 //             </div>
 
 //             <div className="cra-form-group">
-//               <label className="cra-label">Registered Phone Number</label>
+//               <label className="cra-label">OTP Shared to this Number</label>
 //               <input 
 //                 type="tel" 
 //                 className="cra-input" 
 //                 placeholder="Enter 10-digit number to receive OTP"
 //                 value={phone}
 //                 maxLength={10}
+//                 disabled={true}
 //                 onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))}
 //               />
 //             </div>
@@ -596,11 +664,12 @@
 //             </div>
 //           </>
 //         )}
-
+        
 //       </div>
 //     </div>
 //   );
-// }
+// } 
+
 
 
 
@@ -608,7 +677,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../apiconnector";
 import Logo from "../../../assets/Logo.png"; // Adjust the path as necessary
-
+import Terms from "./Terms"; // Make sure this path points to your Terms.jsx file
 
 export default function ClientRateAgreement() {
   const [searchParams] = useSearchParams();
@@ -626,7 +695,11 @@ export default function ClientRateAgreement() {
   const [otp, setOtp] = useState("");
   const [isSendingOtp, setIsSendingOtp] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
+  
+  // Checkbox States
   const [agreed, setAgreed] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false); // NEW: Terms checkbox state
+  const [showTermsModal, setShowTermsModal] = useState(false); // NEW: Terms modal state
 
   // Callback Form States
   const [cbHospitalName, setCbHospitalName] = useState("");
@@ -634,32 +707,6 @@ export default function ClientRateAgreement() {
   const [cbPhone, setCbPhone] = useState("");
   const [cbMessage, setCbMessage] = useState("");
   const [isSubmittingCb, setIsSubmittingCb] = useState(false);
-
-  // // Fetch the rate list using the token when the page loads
-  // useEffect(() => {
-  //   if (!token) {
-  //     setError("Invalid or missing agreement token.");
-  //     setLoading(false);
-  //     return;
-  //   }
-
-  //   fetch(`${BASE_URL}/client/rates/view/?token=${token}`)
-  //     .then(async (res) => {
-  //       const data = await res.json();
-  //       if (!res.ok) throw new Error(data.error || "Failed to load rate list.");
-        
-  //       const parsedRates = typeof data.rate_list === 'string' 
-  //         ? JSON.parse(data.rate_list) 
-  //         : data.rate_list;
-
-  //       setClientData({ ...data, rate_list: parsedRates });
-  //       setLoading(false);
-  //     })
-  //     .catch((err) => {
-  //       setError(err.message);
-  //       setLoading(false);
-  //     });
-  // }, [token]);
 
   // Fetch the rate list using the token when the page loads
   useEffect(() => {
@@ -680,7 +727,6 @@ export default function ClientRateAgreement() {
 
         setClientData({ ...data, rate_list: parsedRates });
         
-        // ADDED THIS BLOCK: Set the phone number if it comes from the API
         if (data.phone) {
           setPhone(data.phone);
         }
@@ -746,7 +792,7 @@ export default function ClientRateAgreement() {
       .finally(() => setIsVerifying(false));
   };
 
-  // ✅ UPDATED: Handle Callback Request Submission to Backend
+  // Handle Callback Request Submission to Backend
   const handleCallbackSubmit = async () => {
     if (!cbHospitalName.trim() || !cbName.trim() || !cbPhone.trim()) {
       alert("Please fill in the Hospital Name, Contact Person, and Phone Number.");
@@ -778,14 +824,12 @@ export default function ClientRateAgreement() {
 
       if (response.ok) {
         alert("Callback request submitted successfully! Our team will contact you soon.");
-        // Clear the form fields
         setCbHospitalName("");
         setCbName("");
         setCbPhone("");
         setCbMessage("");
 
         navigate("/");
-        // Return to main screen
         setStep(1); 
       } else {
         alert(data.error || "Failed to submit request. Please try again.");
@@ -849,15 +893,26 @@ export default function ClientRateAgreement() {
       `}</style>
 
       <div className="cra-card">
-        <div className="cra-header">
-          <img src={Logo} alt="Logo" className="cra-logo" />
-          <h1 className="cra-title">Greetings from U4RAD Technologies</h1>
-          <div className="cra-greeting-text">
-            Thank you for connecting with us.<br />
-            Kindly check the rates below:
-          </div>
-          <p className="cra-subtitle">Quotation for: <strong>{clientData?.client_name}</strong></p>
-        </div>
+      <div className="cra-header">
+        <img src={Logo} alt="Logo" className="cra-logo" />
+        
+        <h1 className="cra-title">
+          Quotation for: {clientData?.client_name}
+        </h1>
+        
+        <p style={{ marginTop: "1rem", marginBottom: "1rem", fontSize: "14px", fontWeight: "normal" }}>
+          Greetings from U4RAD Technologies<br />
+          Thank you for connecting with us.<br />
+          Kindly check the rates below:
+        </p>
+
+        <p className="cra-info-text" style={{ textAlign: "left", lineHeight: "1.5" }}>
+          The rates mentioned below are the standard rates applicable when cases are reported by U4Rad's assigned radiologists.
+          <br />
+          <br />
+          <strong>Note:</strong> Customized radiologist selection is also available. In such cases, pricing is market-driven and may vary based on the selected specialist's experience, qualifications, affiliated institution, and specific requirements.
+        </p>
+      </div>
 
         {/* STEP 1: REVIEW RATES */}
         {step === 1 && (
@@ -885,7 +940,8 @@ export default function ClientRateAgreement() {
               </table>
             </div>
 
-            <div className="cra-form-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {/* Existing Rates Agreement Checkbox */}
+            <div className="cra-form-group" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
               <input 
                 type="checkbox" 
                 id="agree" 
@@ -898,23 +954,64 @@ export default function ClientRateAgreement() {
               </label>
             </div>
 
-            <div className="cra-form-group">
-              <label className="cra-label">Registered Phone Number</label>
+            {/* NEW: Terms and Conditions Checkbox */}
+            <div className="cra-form-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <input
+                type="checkbox"
+                id="terms"
+                checked={acceptedTerms}
+                onChange={(e) => setAcceptedTerms(e.target.checked)}
+                style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+              />
+              <label htmlFor="terms" style={{ fontSize: '14px', color: '#555', display: 'flex', alignItems: 'center' }}>
+                I agree to the{" "}
+                <button 
+                  type="button" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowTermsModal(true);
+                  }}
+                  style={{ 
+                    background: 'none', 
+                    border: 'none', 
+                    padding: '0 0 0 4px', 
+                    color: '#0066cc', 
+                    textDecoration: 'underline', 
+                    cursor: 'pointer',
+                    fontSize: 'inherit',
+                    fontFamily: 'inherit'
+                  }}
+                >
+                  Terms and Conditions
+                </button>
+              </label>
+            </div>
+
+            {/* <div className="cra-form-group">
+              <label className="cra-label">OTP sent to this Number</label>
               <input 
                 type="tel" 
                 className="cra-input" 
                 placeholder="Enter 10-digit number to receive OTP"
                 value={phone}
                 maxLength={10}
+                disabled={true}
                 onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))}
               />
+            </div> */}
+
+            <div className="cra-form-group">
+              <p className="cra-label" style={{ marginBottom: "0" }}>
+                OTP sent to this Number: <strong>{phone}</strong>
+              </p>
             </div>
 
             <div className="cra-btn-group">
               <button 
                 className="cra-btn" 
                 onClick={handleSendOtp}
-                disabled={!agreed || phone.length !== 10 || isSendingOtp}
+                // Updated disabled logic to require both checkboxes
+                disabled={!agreed || !acceptedTerms || phone.length !== 10 || isSendingOtp}
               >
                 {isSendingOtp ? "Sending OTP..." : "Send OTP to Verify"}
               </button>
@@ -984,7 +1081,6 @@ export default function ClientRateAgreement() {
         {/* STEP 4: CALLBACK FORM */}
         {step === 4 && (
           <>
-            {/* ── INCLUDED RED-THEME CSS STYLES ── */}
             <style>
               {`
                 .premium-cb-container {
@@ -1009,7 +1105,6 @@ export default function ClientRateAgreement() {
                   margin-bottom: 32px;
                 }
 
-                /* Red gradient icon box */
                 .premium-cb-icon-box {
                   width: 56px;
                   height: 56px;
@@ -1019,7 +1114,7 @@ export default function ClientRateAgreement() {
                   display: flex;
                   align-items: center;
                   justify-content: center;
-                  color: #dc2626; /* U4RAD Brand Red */
+                  color: #dc2626;
                   box-shadow: inset 0 0 0 1px rgba(220, 38, 38, 0.15);
                 }
 
@@ -1063,7 +1158,6 @@ export default function ClientRateAgreement() {
                 .premium-textarea ~ .premium-floating-label { top: 26px; }
                 .premium-input-group .prefix-label { left: 62px; }
 
-                /* Floating label turns Brand Red on focus */
                 .premium-input:focus ~ .premium-floating-label,
                 .premium-input:not(:placeholder-shown) ~ .premium-floating-label,
                 .premium-input:valid ~ .premium-floating-label {
@@ -1080,7 +1174,6 @@ export default function ClientRateAgreement() {
                   left: 12px; 
                 }
 
-                /* Input border and shadow turns Brand Red on focus */
                 .premium-input:focus {
                   border-color: #dc2626;
                   box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.12);
@@ -1100,7 +1193,6 @@ export default function ClientRateAgreement() {
                   font-family: 'DM Mono', monospace;
                 }
 
-                /* Primary Button is now Brand Red */
                 .premium-submit-btn {
                   width: 100%;
                   padding: 16px;
@@ -1120,7 +1212,7 @@ export default function ClientRateAgreement() {
                 }
 
                 .premium-submit-btn:hover:not(:disabled) {
-                  background: #b91c1c; /* Darker red on hover */
+                  background: #b91c1c; 
                   box-shadow: 0 8px 20px -6px rgba(220, 38, 38, 0.4);
                   transform: translateY(-1px);
                 }
@@ -1165,9 +1257,7 @@ export default function ClientRateAgreement() {
               `}
             </style>
 
-            {/* ── FORM HTML ── */}
             <div className="premium-cb-container">
-              {/* Header Section */}
               <div className="premium-cb-header">
                 <div className="premium-cb-icon-box">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -1180,10 +1270,7 @@ export default function ClientRateAgreement() {
                 </p>
               </div>
 
-              {/* Form Section with Floating Labels */}
               <div className="premium-cb-form">
-                
-                {/* NEW: Hospital / Center Name Field */}
                 <div className="premium-input-group">
                   <input
                     type="text"
@@ -1247,7 +1334,6 @@ export default function ClientRateAgreement() {
                 </button>
               </div>
 
-              {/* Footer Section */}
               <div className="premium-cb-footer">
                 <button className="premium-back-btn" onClick={() => setStep(1)}>
                   <svg viewBox="0 0 20 20" fill="currentColor">
@@ -1259,8 +1345,12 @@ export default function ClientRateAgreement() {
             </div>
           </>
         )}
-        
       </div>
+
+      {/* NEW: Render Terms Modal if state is true */}
+      {showTermsModal && (
+        <Terms onClose={() => setShowTermsModal(false)} />
+      )}
     </div>
   );
-} 
+}
