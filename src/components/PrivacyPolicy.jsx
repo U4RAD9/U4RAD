@@ -131,7 +131,7 @@ const PrivacyPolicy = ({ onClose }) => {
         Any discrepancies and grievances with respect to processing of Sensitive Personal Data or Information shall be informed to the designated Grievance Officer as mentioned below:
         </p>
         <p className="mt-2">
-          Officer: Dr. Ruchi Jangra <br />
+          Officer: Mr. Partha Dey <br />
           Email: contact@u4rad.com
         </p>
 

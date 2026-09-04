@@ -360,15 +360,15 @@ const Footer = () => {
 
             <li className="text-sm border-t pt-3">
               <div className="font-semibold text-primary">Grievance Officer</div>
-              <div>Dr Ruchi Jangra</div>
-              <div>(Manager: Operations)</div>
+              <div>Mr. Partha Dey</div>
+              <div>(CEO, Founder)</div>
 
               <div
-                onClick={() => (window.location.href = 'mailto:drruchi@u4rad.com')}
+                onClick={() => (window.location.href = 'mailto:parthadey@u4rad.com')}
                 className="flex cursor-pointer mt-2"
               >
                 <FaEnvelope className="mr-2" />
-                drruchi@u4rad.com
+                parthadey@u4rad.com
               </div>
 
               <div
