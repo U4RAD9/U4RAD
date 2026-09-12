@@ -424,7 +424,7 @@
 //         >
 //           Contact
 //         </li>
-        
+
 //         {/* Mobile Buttons */}
 //         <li className="p-4 flex flex-col gap-4 mt-2">
 //           <Link
@@ -434,7 +434,7 @@
 //           >
 //             Radiologist Registration
 //           </Link>
-          
+
 //           <Link
 //             to="/onboarding/client"
 //             onClick={handleNav}
@@ -473,7 +473,7 @@ import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { useNavigate, Link } from "react-router-dom";
 import Logo from "../assets/Logo.png";
-import XraiLogo from "../assets/xrailogo.png"; 
+import XraiLogo from "../assets/xrailogo.png";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -485,7 +485,7 @@ const Navbar = () => {
 
   return (
     <div className="sticky top-0 left-0 w-full z-50 flex justify-between items-center bg-white h-24 px-4 lg:px-6 xl:px-8 text-black shadow-md">
-      
+
       {/* Main Logo */}
       <img
         className="w-32 lg:w-36 xl:w-48 my-4 cursor-pointer flex-shrink-0"
@@ -562,7 +562,7 @@ const Navbar = () => {
         {/* POCT / XraiDigital Image Button */}
         <li className="relative group mx-1 xl:ml-2 cursor-pointer flex items-center">
           <a
-            href="https://xraidigital.com/Home/corporate"
+            href="https://xraidigital.com/corporate"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-white border border-gray-300 rounded shadow-sm px-2 py-1 flex items-center justify-center transition-all duration-300 hover:shadow-md hover:border-blue-400 hover:bg-slate-50"
@@ -605,7 +605,7 @@ const Navbar = () => {
         <li className="p-4 border-b font-bold hover:text-[hsl(357,100%,59%)] cursor-pointer" onClick={() => { handleNav(); navigate("/Vision"); }}>Vision</li>
         <li className="p-4 border-b font-bold hover:text-[hsl(357,100%,59%)] cursor-pointer" onClick={() => { handleNav(); navigate("/Awards"); }}>Awards</li>
         <li className="p-4 border-b font-bold hover:text-[hsl(357,100%,59%)] cursor-pointer" onClick={() => { handleNav(); navigate("/Contact"); }}>Contact</li>
-        
+
         {/* Mobile Buttons */}
         <li className="p-4 flex flex-col gap-4 mt-2">
           <Link
@@ -615,7 +615,7 @@ const Navbar = () => {
           >
             Radiologist Registration
           </Link>
-          
+
           <Link
             to="/onboarding/client"
             onClick={handleNav}
@@ -627,7 +627,7 @@ const Navbar = () => {
           {/* POCT Image Button for Mobile */}
           <div className="flex flex-col mt-2">
             <a
-              href="https://xraidigital.com/Home/corporate"
+              href="https://xraidigital.com/corporate"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-white border border-gray-300 rounded shadow-md px-4 py-2 flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:border-blue-400 hover:bg-slate-50"
