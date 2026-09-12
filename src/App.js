@@ -139,6 +139,7 @@ import ContactDashboard from './components/pages/doctoronboarding/ContactDashboa
 import Career from './components/pages/doctoronboarding/career.jsx';
 
 import ClientRateAgreementPage from './components/client/components/ClientRateAgreement.jsx';
+import WhatsAppButton from './components/WhatsAppButton';
 
 function Layout() {
 
@@ -151,9 +152,22 @@ function Layout() {
     location.pathname.includes("/rate-list/") ||
     location.pathname === "/onboarding/client";   // ← hide navbar/footer on client onboarding page
 
+  const allowedPaths = [
+    "/", "/About", "/Services", "/Technology", "/Vision", "/Awards", "/Contact",
+    "/onboarding/radiologist", "/onboarding/client"
+  ];
+
+  // Normalize the current path by removing trailing slash if present (except for just "/")
+  const currentPath = location.pathname.endsWith('/') && location.pathname !== '/'
+    ? location.pathname.slice(0, -1)
+    : location.pathname;
+
+  const showWhatsAppButton = allowedPaths.includes(currentPath);
+
   return (
     <>
       {!hideLayout && <Navbar />}
+      {showWhatsAppButton && <WhatsAppButton />}
 
       <Routes>
 

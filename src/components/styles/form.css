@@ -269,3 +269,59 @@ input, textarea {
   color: #fff !important;
   border: 1px solid #ff0000 !important;
 }
+
+/* ===== Mobile Responsiveness ===== */
+@media screen and (max-width: 768px) {
+  .form-wrapper {
+    width: 95%;
+    padding: 20px 15px;
+    margin: 20px auto;
+  }
+
+  .form-title {
+    font-size: 20px;
+  }
+
+  .progress-steps {
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    justify-content: flex-start;
+  }
+  
+  .step p {
+    font-size: 11px;
+    margin-top: 4px;
+  }
+
+  .circle {
+    width: 25px;
+    height: 25px;
+    font-size: 12px;
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .photo-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .photo-buttons input[type="file"] {
+    width: 100%;
+  }
+
+  .webcam-view {
+    width: 100%;
+    max-width: 250px;
+  }
+}

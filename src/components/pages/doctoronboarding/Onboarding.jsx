@@ -43,7 +43,7 @@ export default function Onboarding() {
   // Updated to include the "Step X" labels
   const steps = [
     { title: "Step 1", desc: "Complete the registration form." },
-    { title: "Step 2", desc: "Review and approve the quotation." },
+    { title: "Step 2", desc: "Review and approve the rate." },
     { title: "Step 3", desc: "Complete the PACS installation and begin your journey with U4RAD." }
   ];
 

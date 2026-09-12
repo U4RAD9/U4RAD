@@ -307,3 +307,46 @@ color:white;
 border:none;
 padding:5px 10px;
 }
+
+/* ===== Mobile Responsiveness ===== */
+@media screen and (max-width: 768px) {
+  .onboarding-box {
+    padding: 30px 20px;
+  }
+
+  .review-line {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+
+  .review-separator {
+    display: none;
+  }
+
+  .review-label {
+    font-weight: 600;
+  }
+
+  .availability-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 15px 0;
+  }
+
+  .day-col {
+    margin-bottom: 5px;
+  }
+
+  .time-col {
+    justify-content: space-between;
+  }
+
+  .time-col input {
+    width: 45%;
+  }
+
+  .card-wrapper {
+    flex-direction: column;
+  }
+}

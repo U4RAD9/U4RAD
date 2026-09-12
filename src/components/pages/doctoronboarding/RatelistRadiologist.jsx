@@ -129,7 +129,22 @@ const RateList = () => {
     backBtnColor:"#fff",
   };
 
-  const rows = rateList ? [
+  let selectedModalities = { MRI: true, CT: true, "X-Ray": true };
+
+  if (radiologist && radiologist.reporting_area) {
+    let ra = radiologist.reporting_area;
+    if (typeof ra === "string") {
+      try { ra = JSON.parse(ra); } catch (e) {}
+    }
+    
+    if (ra && typeof ra === "object") {
+      selectedModalities.MRI = (ra.mri_options && ra.mri_options.length > 0) || !!ra.mri_others;
+      selectedModalities.CT = (ra.ct_options && ra.ct_options.length > 0) || !!ra.ct_others;
+      selectedModalities["X-Ray"] = ra.xray === true || ra.xray === "true";
+    }
+  }
+
+  const allRows = rateList ? [
     { label: "MRI",   type: "Head/Brain/Chest/Abdomen/Pelvis/PNS/Face",             key: "mri1"  },
     { label: "MRI",   type: "MRI Screening (per body parts)",                        key: "mri2"  },
     { label: "MRI",   type: "MSK",                                                   key: "mri3"  },
@@ -146,6 +161,8 @@ const RateList = () => {
     { label: "X-Ray", type: "Per Exposure - any body parts",                         key: "xray1" },
     { label: "X-Ray", type: "Special Procedure - Barium/IVP/HSG",                   key: "xray2" },
   ] : [];
+
+  const rows = allRows.filter(row => selectedModalities[row.label]);
 
   const showButtons = radiologist &&
     (radiologist.stage2status === "applied" || radiologist.stage2status === "under_progress");

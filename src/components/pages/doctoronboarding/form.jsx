@@ -47,6 +47,11 @@ export default function DoctorOnboardingForm() {
     setIsValid(!!validateStep());
   }, [validateStep]);
 
+  // Smooth scroll to top on step change for better mobile UX
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [step]);
+
   /* ─── NAVIGATION ─── */
   const nextStep = () => { if (isValid && step < totalSteps) setStep((s) => s + 1); };
   const prevStep = () => { if (step > 1) setStep((s) => s - 1); };
