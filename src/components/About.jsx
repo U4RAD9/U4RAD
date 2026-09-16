@@ -276,12 +276,42 @@ const About = () => {
             {/* Team Card 3 */}
             <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
               <img
-                src='/images/dipanjan.png'
-                alt='Mr Dipanjan Paul'
+                src='/images/aakash.jpeg'
+                alt='Mr Aakash Dwivedi'
                 className='w-32 h-32 mx-auto rounded-full mb-4'
               />
-              <h4 className='text-2xl font-bold'>Mr Dipanjan Paul</h4>
-              <p className='text-gray-600'>Strategy & BD</p>
+              <h4 className='text-2xl font-bold'>Aakash Dwivedi</h4>
+              <p className='text-gray-600'>Team lead -IT</p>
+            </div>
+            {/* Team Card 4 */}
+            <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
+              <img
+                src='/images/rinku.jpeg'
+                alt='Pooja Singh'
+                className='w-32 h-32 mx-auto rounded-full mb-4'
+              />
+              <h4 className='text-2xl font-bold'>Rinku Yadav</h4>
+              <p className='text-gray-600'>Operations Manager</p>
+            </div>
+            {/* Team Card 5 */}
+            <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
+              <img
+                src='/images/kausik.jpeg'
+                alt='Pooja Singh'
+                className='w-32 h-32 mx-auto rounded-full mb-4'
+              />
+              <h4 className='text-2xl font-bold'>Kaushik</h4>
+              <p className='text-gray-600'>Key account manager ( International+ Domestic)</p>
+            </div>
+            {/* Team Card 6 */}
+            <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
+              <img
+                src='/images/rajendra.jpeg'
+                alt='Pooja Singh'
+                className='w-32 h-32 mx-auto rounded-full mb-4'
+              />
+              <h4 className='text-2xl font-bold'>Rajendra</h4>
+              <p className='text-gray-600'>Regional sales manager</p>
             </div>
           </div>
         </div>
