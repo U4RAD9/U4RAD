@@ -1,7 +1,5 @@
 ﻿// import { useState } from 'react';
 // import { FaLinkedin } from 'react-icons/fa';
-// import pd from '../assets/pd.jpg';
-// import vs from '../assets/vs.jpg';
 
 // const About = () => {
 //   const [showParthaBio, setShowParthaBio] = useState(false);
@@ -27,7 +25,7 @@
 //           <div className='flex flex-wrap justify-center gap-8'>
 //             {/* Mr. Partha Dey */}
 //             <div className='w-full max-w-[300px] shadow-xl flex flex-col p-4 my-4 rounded-lg hover:scale-105 duration-300 mb-20'>
-//               <img className='w-40 mx-auto mt-[-3rem] bg-transparent rounded-full' src={pd} alt='PD' />
+//               <img className='w-40 mx-auto mt-[-3rem] bg-transparent rounded-full' src='/images/parthadey.jpg' alt='PD' />
 //               <h2 className='text-2xl font-bold text-center py-8'>MR. PARTHA DEY</h2>
 //               <p className='text-center text-4xl font-bold'>Co-Founder, CEO</p>
 //               <div className='text-center font-medium text-justify px-4'>
@@ -59,7 +57,7 @@
 
 //             {/* Dr. Vivek Sahi */}
 //             <div className='w-full max-w-[300px] shadow-xl bg-gray-100 flex flex-col p-4 my-4 rounded-lg hover:scale-105 duration-300 mb-20'>
-//               <img style={{ height: '205px' }} className='w-40 mx-auto mt-[-3rem] bg-transparent mb-2 rounded-full' src={vs} alt='VS' />
+//               <img style={{ height: '205px' }} className='w-40 mx-auto mt-[-3rem] bg-transparent mb-2 rounded-full' src='/images/viveksahi.jpg' alt='VS' />
 //               <h2 className='text-2xl font-bold text-center py-8'>DR. VIVEK SAHI</h2>
 //               <p className='text-center text-4xl font-bold'>Co-Founder, MD</p>
 //               <div className='text-center font-medium text-justify px-4'>
@@ -98,49 +96,56 @@
 //             product development, technician training, and pre-sales functions, the team ensures smooth and
 //             efficient execution across all verticals.
 //           </p>
-//           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
+//           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
 //             {/* Team Card 1 */}
 //             <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
 //               <img
-//                 src="https://xraidigital.com/Content/images/team/Ruchi_mam.jpg"
-//                 alt="Dr Ruchi Jangra"
-//                 className="w-32 h-32 mx-auto rounded-full mb-4 object-cover"
-//                 onError={(e) => {
-//                   console.log("Image failed");
-//                 }}
-//               />
-//               <h4 className='text-2xl font-bold'>Dr Ruchi Jangra</h4>
-//               <p className='text-gray-600'>Manager - Business Operations and Founder’s office representative</p>
-//             </div>
-//             {/* Team Card 2 */}
-//             <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
-//               <img
-//                 src='https://xraidigital.com/Content/images/team/ManagerPreSales.png'
+//                 src='/images/pooja.png'
 //                 alt='Pooja Singh'
 //                 className='w-32 h-32 mx-auto rounded-full mb-4'
 //               />
 //               <h4 className='text-2xl font-bold'>Pooja Singh</h4>
 //               <p className='text-gray-600'>Manager - Product and Pre-Sales</p>
 //             </div>
-//             {/* Team Card 3 */}
+//             {/* Team Card 2 */}
 //             <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
 //               <img
-//                 src='https://xraidigital.com/Content/images/team/Captain.png'
+//                 src='/images/aradhna.png'
 //                 alt='Aradhana Dutt'
 //                 className='w-32 h-32 mx-auto rounded-full mb-4'
 //               />
 //               <h4 className='text-2xl font-bold'>Aradhana Dutt</h4>
-//               <p className='text-gray-600'>Captain - New Initiatives</p>
+//               <p className='text-gray-600'>Director - Business Development</p>
+//             </div>
+//             {/* Team Card 3 */}
+//             <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
+//               <img
+//                 src='/images/aakash.jpeg'
+//                 alt='Mr Aakash Dwivedi'
+//                 className='w-32 h-32 mx-auto rounded-full mb-4'
+//               />
+//               <h4 className='text-2xl font-bold'>Aakash Dwivedi</h4>
+//               <p className='text-gray-600'>Team lead -IT</p>
 //             </div>
 //             {/* Team Card 4 */}
 //             <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
 //               <img
-//                 src='https://xraidigital.com/Content/images/team/BD.png'
-//                 alt='Mr Dipanjan Paul'
+//                 src='/images/rinku.jpeg'
+//                 alt='Pooja Singh'
 //                 className='w-32 h-32 mx-auto rounded-full mb-4'
 //               />
-//               <h4 className='text-2xl font-bold'>Mr Dipanjan Paul</h4>
-//               <p className='text-gray-600'>Strategy & BD</p>
+//               <h4 className='text-2xl font-bold'>Rinku Yadav</h4>
+//               <p className='text-gray-600'>Operations Manager</p>
+//             </div>
+//             {/* Team Card 5 */}
+//             <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
+//               <img
+//                 src='/images/kausik.jpeg'
+//                 alt='Pooja Singh'
+//                 className='w-32 h-32 mx-auto rounded-full mb-4'
+//               />
+//               <h4 className='text-2xl font-bold'>Kaushik</h4>
+//               <p className='text-gray-600'>Key account manager ( International+ Domestic)</p>
 //             </div>
 //           </div>
 //         </div>
@@ -151,6 +156,9 @@
 // };
 
 // export default About;
+
+
+
 
 
 
@@ -224,7 +232,7 @@ const About = () => {
                     </p>
                     <div className="text-center mt-2">
                       <a
-                        href="https:linkedin.com/in/drviveksahi"
+                        href="https://linkedin.com/in/drviveksahi"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center text-blue-700 hover:underline"
@@ -243,79 +251,103 @@ const About = () => {
               </button>
             </div>
           </div>
+
           {/* Core Team Section */}
-        <div className='max-w-[1240px] mx-auto px-4 py-12'>
-          <h2 className='text-4xl font-bold text-center mb-8'>Core Team</h2>
-          <p className='text-xl text-gray-600 text-center mb-12'>
-            The core team at U4RAD Technologies brings a unique blend of expertise and experience,
-            driving innovation in healthcare. With a strong background in healthcare operations management,
-            product development, technician training, and pre-sales functions, the team ensures smooth and
-            efficient execution across all verticals.
-          </p>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-            {/* Team Card 1 */}
-            <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
-              <img
-                src='/images/pooja.png'
-                alt='Pooja Singh'
-                className='w-32 h-32 mx-auto rounded-full mb-4'
-              />
-              <h4 className='text-2xl font-bold'>Pooja Singh</h4>
-              <p className='text-gray-600'>Manager - Product and Pre-Sales</p>
-            </div>
-            {/* Team Card 2 */}
-            <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
-              <img
-                src='/images/aradhna.png'
-                alt='Aradhana Dutt'
-                className='w-32 h-32 mx-auto rounded-full mb-4'
-              />
-              <h4 className='text-2xl font-bold'>Aradhana Dutt</h4>
-              <p className='text-gray-600'>Captain - New Initiatives</p>
-            </div>
-            {/* Team Card 3 */}
-            <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
-              <img
-                src='/images/aakash.jpeg'
-                alt='Mr Aakash Dwivedi'
-                className='w-32 h-32 mx-auto rounded-full mb-4'
-              />
-              <h4 className='text-2xl font-bold'>Aakash Dwivedi</h4>
-              <p className='text-gray-600'>Team lead -IT</p>
-            </div>
-            {/* Team Card 4 */}
-            <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
-              <img
-                src='/images/rinku.jpeg'
-                alt='Pooja Singh'
-                className='w-32 h-32 mx-auto rounded-full mb-4'
-              />
-              <h4 className='text-2xl font-bold'>Rinku Yadav</h4>
-              <p className='text-gray-600'>Operations Manager</p>
-            </div>
-            {/* Team Card 5 */}
-            <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
-              <img
-                src='/images/kausik.jpeg'
-                alt='Pooja Singh'
-                className='w-32 h-32 mx-auto rounded-full mb-4'
-              />
-              <h4 className='text-2xl font-bold'>Kaushik</h4>
-              <p className='text-gray-600'>Key account manager ( International+ Domestic)</p>
-            </div>
-            {/* Team Card 6 */}
-            <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
-              <img
-                src='/images/rajendra.jpeg'
-                alt='Pooja Singh'
-                className='w-32 h-32 mx-auto rounded-full mb-4'
-              />
-              <h4 className='text-2xl font-bold'>Rajendra</h4>
-              <p className='text-gray-600'>Regional sales manager</p>
+          <div className='max-w-[1240px] mx-auto px-4 py-12'>
+            <h2 className='text-4xl font-bold text-center mb-8'>Core Team</h2>
+            <p className='text-xl text-gray-600 text-center mb-12'>
+              The core team at U4RAD Technologies brings a unique blend of expertise and experience,
+              driving innovation in healthcare. With a strong background in healthcare operations management,
+              product development, technician training, and pre-sales functions, the team ensures smooth and
+              efficient execution across all verticals.
+            </p>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+              
+              {/* Team Card 1 */}
+              <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
+                <img
+                  src='/images/pooja.png'
+                  alt='Pooja Singh'
+                  className='w-32 h-32 mx-auto rounded-full mb-4'
+                />
+                <h4 className='text-2xl font-bold'>
+                  <a 
+                    href="https://www.linkedin.com/in/pooja-singh-810a7b237/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-blue-600 hover:underline transition-colors"
+                  >
+                    Pooja Singh
+                  </a>
+                </h4>
+                <p className='text-gray-600 mt-1'>Manager - Product and Pre-Sales</p>
+              </div>
+
+              {/* Team Card 2 */}
+              <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
+                <img
+                  src='/images/aradhna.png'
+                  alt='Aradhana Dutt'
+                  className='w-32 h-32 mx-auto rounded-full mb-4'
+                />
+                <h4 className='text-2xl font-bold'>
+                  <a 
+                    href="https://www.linkedin.com/in/aradhana-datt-7540b18?utm_source=share_via&utm_content=profile&utm_medium=member_android" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-blue-600 hover:underline transition-colors"
+                  >
+                    Aradhana Dutt
+                  </a>
+                </h4>
+                <p className='text-gray-600 mt-1'>Director - Business Development</p>
+              </div>
+
+              {/* Team Card 3 */}
+              <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
+                <img
+                  src='/images/aakash.jpeg'
+                  alt='Mr Aakash Dwivedi'
+                  className='w-32 h-32 mx-auto rounded-full mb-4'
+                />
+                <h4 className='text-2xl font-bold'>
+                  <a 
+                    href="https://linkedin.com/in/akash-d-96174318b" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-blue-600 hover:underline transition-colors"
+                  >
+                    Aakash Dwivedi
+                  </a>
+                </h4>
+                <p className='text-gray-600 mt-1'>Team lead - IT</p>
+              </div>
+
+              {/* Team Card 4 */}
+              <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
+                <img
+                  src='/images/rinku.jpeg'
+                  alt='Rinku Yadav'
+                  className='w-32 h-32 mx-auto rounded-full mb-4'
+                />
+                <h4 className='text-2xl font-bold'>Rinku Yadav</h4>
+                <p className='text-gray-600 mt-1'>Operations Manager</p>
+              </div>
+
+              {/* Team Card 5 */}
+              <div className='bg-white shadow-lg rounded-lg p-6 text-center hover:scale-105 duration-300'>
+                <img
+                  src='/images/kausik.jpeg'
+                  alt='Kaushik'
+                  className='w-32 h-32 mx-auto rounded-full mb-4'
+                />
+                <h4 className='text-2xl font-bold'>Kaushik</h4>
+                <p className='text-gray-600 mt-1'>Key Account Manager (International + Domestic)</p>
+              </div>
+
             </div>
           </div>
         </div>
-       </div>
       </div>
     </>
   );
